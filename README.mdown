@@ -1,0 +1,10 @@
+Clark Fitzgerald
+
+This directory contains my dotfiles and personal utility functions
+
+To clone this directory run:
+`$ git clone https://github.com/clarkfitzg/utils`
+
+To use these dotfiles and write over the current ones run:
+`$ cd dotfiles`
+`$ ./setup.py`

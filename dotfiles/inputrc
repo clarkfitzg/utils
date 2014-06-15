@@ -1,0 +1,6 @@
+# .inputrc
+# Clark Fitzgerald
+
+# Use vi key bindings
+set editing-mode vi
+set keymap vi

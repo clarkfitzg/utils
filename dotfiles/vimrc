@@ -1,0 +1,33 @@
+" Vimrc 
+" Clark Fitzgerald
+"
+" Set the colorscheme and font
+"colorscheme delek
+set number              " Display line numbers
+"set gfn=Menlo:h14
+
+" Tab settings
+set tabstop=4
+set expandtab
+set softtabstop=4
+set shiftwidth=4
+
+" To use Python mode
+"filetype off
+"call pathogen#infect()
+"call pathogen#helptags()
+
+filetype plugin indent on
+syntax on
+
+" Keep it under 80 characters wide
+" set textwidth=79
+
+" From Practical Vim book
+set history=200     " Change from 20 commands to 200 in history.
+
+" Toggle folding with spacebar
+set foldmethod=indent
+nnoremap <Space> za
+vnoremap <Space> zf
+set foldnestmax=2

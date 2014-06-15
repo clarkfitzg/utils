@@ -1,0 +1,21 @@
+# bashrc
+# Clark Fitzgerald
+
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+fi
+
+# Trying to get the files in color.
+export CLICOLOR=1
+export LSCOLORS=ExFxCxDxBxegedabagacad
+
+# added by Anaconda 1.8.0 installer
+export PATH="//anaconda/bin:$PATH"
+
+# Make the terminal start with tmux
+#if [[ ! $Term =~ screen ]]; then
+#    exec tmux
+#fi
+
+# Use single $ for prompt
+PS1='\W \u$ '

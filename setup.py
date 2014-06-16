@@ -24,7 +24,7 @@ def symlink_dotfiles():
     for file in os.listdir(dotfiles):
         src = dotfiles + os.sep + file
         dst = home + os.sep + '.' + file
-        if os.path.isfile(dst):
+        if os.path.isfile(dst) or os.path.islink(dst):
             os.remove(dst)
         os.symlink(src, dst)
 

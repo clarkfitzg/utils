@@ -6,6 +6,11 @@ Script must be run from directory where it's located
 import os
 
 
+# Manually appending path until bashrc is sourced
+os.sys.path.append(os.sep + 'python')
+
+import utils
+
 wd = os.getcwd()
 home = os.path.expanduser('~')
  

@@ -12,6 +12,9 @@ export LSCOLORS=ExFxCxDxBxegedabagacad
 # added by Anaconda 1.8.0 installer
 export PATH="//anaconda/bin:$PATH"
 
+# Add personal utilities to Python path
+export PYTHONPATH=${PYTHONPATH}:~/utils/python
+
 # Make the terminal start with tmux
 #if [[ ! $Term =~ screen ]]; then
 #    exec tmux

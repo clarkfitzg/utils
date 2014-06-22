@@ -1,21 +1,15 @@
 #!/usr/bin/env python
 '''
-Script must be run from directory where it's located
+Script must be run from within directory where it's located
+so that working directory is correct.
 '''
 
 import os
 
 
-# Manually appending path until bashrc is sourced
-os.sys.path.append(os.sep + 'python')
-
-import utils
-
 wd = os.getcwd()
 home = os.path.expanduser('~')
- 
 
-# TODO- Generalize this function to symlink from somewhere to anywhere
 
 def symlink_dotfiles():
     '''
@@ -25,7 +19,7 @@ def symlink_dotfiles():
     '''
 
     dotfiles = wd + os.sep + 'dotfiles'
-   
+
     for file in os.listdir(dotfiles):
         src = dotfiles + os.sep + file
         dst = home + os.sep + '.' + file

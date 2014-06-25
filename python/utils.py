@@ -7,6 +7,7 @@ Clark Fitzgerald
 '''
 
 import collections
+from collections import Iterable
 
 
 def replicate(n, func, *args, **kwargs):
@@ -72,3 +73,16 @@ class weighcount(collections.Counter):
         '''
         common_values = (t[0] for t in self.most_common(n))
         return [(x, self.weight(x)) for x in common_values]
+
+
+def flatten(nested_items, ignore_types=(str, bytes)):
+    '''
+    Generator returning elements contained in nested sequence
+
+    Recipe 4.14 from Python Cookbook
+    '''
+    for x in nested_items:
+        if isinstance(x, Iterable) and not isinstance(x, ignore_types):
+            yield from flatten(x, ignore_types)
+        else:
+            yield x

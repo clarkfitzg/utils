@@ -1,5 +1,5 @@
 from nose.tools import assert_equal
-from utils import weighcount
+from utils import weighcount, flatten
 
 
 class test_replicate:
@@ -25,3 +25,14 @@ class test_weighcount:
 
     def test_common_weights_n(self):
         assert_equal(self.wc.common_weights(2), [('c', 0.5), ('b', 0.4)])
+
+
+class test_flatten:
+
+    def test_mixed_containers(self):
+        mixed = [1, 2, (3, 4, {5})]
+        assert_equal(list(flatten(mixed)), [1, 2, 3, 4, 5])
+
+    def test_default_dont_iterate_string(self):
+        stringlist = ['abc', 'def']
+        assert_equal(list(flatten(stringlist)), ['abc', 'def'])

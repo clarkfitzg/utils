@@ -86,3 +86,14 @@ def flatten(nested_items, ignore_types=(str, bytes)):
             yield from flatten(x, ignore_types)
         else:
             yield x
+
+
+def to_csv(iterable, header=None):
+    pass
+
+
+def download_many(urls):
+    '''
+    Download content from many urls at the same time using threading
+    '''
+    pass

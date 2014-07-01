@@ -1,11 +1,12 @@
 '''
 utils.py
 
-General purpose python utility functions
+Recipes and general purpose python utility functions
 
 Clark Fitzgerald
 '''
 
+import csv
 import collections
 from collections import Iterable
 
@@ -88,7 +89,19 @@ def flatten(nested_items, ignore_types=(str, bytes)):
             yield x
 
 
-def to_csv(iterable, header=None):
+def to_csv(filename, iterable, header=None, mode='w'):
+    '''
+    Write an iterable to a CSV file
+    '''
+    with open(filename, mode) as f:
+        fwriter = csv.writer(f)
+        fwriter.writerows(iterable)
+
+
+def from_csv(filename, header=True):
+    '''
+    Returns an iterator over a CSV file
+    '''
     pass
 
 

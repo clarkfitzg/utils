@@ -93,9 +93,30 @@ def to_csv(filename, iterable, header=None, mode='w'):
     '''
     Write an iterable to a CSV file
     '''
+
     with open(filename, mode) as f:
-        fwriter = csv.writer(f)
-        fwriter.writerows(iterable)
+        pen = csv.writer(f)
+
+        # Not all iterables have a next method. Example: range
+        content = iter(iterable)
+
+        # Check the length of the first row to make sure it matches
+        # the length of the header
+        if header:
+
+            # Don't want to check length of string
+            if isinstance(header, str):
+                header = [header]
+
+            first = next(content)
+
+            if len(first) != len(header):
+                raise ValueError('The length of the first element does '
+                                 'not match the length of the header.')
+            else:
+                pen.writerows([header, first])
+
+        pen.writerows(content)
 
 
 def from_csv(filename, header=True):

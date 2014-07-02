@@ -45,10 +45,19 @@ class test_to_csv:
         to_csv('temp.csv', self.content)
         with open('temp.csv') as f:
             assert_equal(f.read(), self.no_header)
-        
+
+    def test_header(self):
+        to_csv('temp.csv', self.content, header=['first', 'second'])
+        with open('temp.csv') as f:
+            assert_equal(f.read(), 'first,second\n' + self.no_header)
+
     @nose.tools.raises(ValueError)
     def test_same_number_fields_as_header(self):
-        pass
+        to_csv('temp.csv', self.content, header=['a', 'b', 'c'])
+
+    @nose.tools.raises(ValueError)
+    def test_dont_take_length_of_string(self):
+        to_csv('temp.csv', self.content, header='ab')
 
 
 class test_flatten:
@@ -60,4 +69,3 @@ class test_flatten:
     def test_default_dont_iterate_string(self):
         stringlist = ['abc', 'def']
         assert_equal(list(flatten(stringlist)), ['abc', 'def'])
-

@@ -1,11 +1,12 @@
 '''
 utils.py
 
-Recipes and general purpose python utility functions
+General purpose python utility functions and recipes
 
 Clark Fitzgerald
 '''
 
+import os
 import csv
 import collections
 from collections import Iterable
@@ -124,6 +125,27 @@ def from_csv(filename, header=True):
     Returns an iterator over a CSV file
     '''
     pass
+
+
+def search_replace(filename, old, new):
+    '''
+    Search through a file and replace string 'old' with 'new'
+
+    Currently only supports exact matches
+    '''
+
+    # Silently skip directories
+    if os.path.isdir(filename):
+        return
+
+    backup_name = filename + '.bak'
+    os.rename(filename, backup_name)
+
+    with open(backup_name) as oldfile, open(filename, 'w') as newfile:
+        for line in oldfile:
+            newfile.write(line.replace(old, new))
+
+    os.remove(backup_name)
 
 
 def download_many(urls):

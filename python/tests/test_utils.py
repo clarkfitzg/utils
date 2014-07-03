@@ -1,7 +1,7 @@
 import os
 import nose
 from nose.tools import assert_equal
-from utils import weighcount, flatten, to_csv
+from utils import weighcount, flatten, to_csv, search_replace
 
 
 class test_replicate:
@@ -69,3 +69,27 @@ class test_flatten:
     def test_default_dont_iterate_string(self):
         stringlist = ['abc', 'def']
         assert_equal(list(flatten(stringlist)), ['abc', 'def'])
+
+
+class test_search_replace:
+
+    def setup(self):
+        with open('testfile.txt', 'w') as f:
+            f.write('old text\nmore oldy\nand then')
+
+    def teardown(self):
+        os.remove('testfile.txt')
+
+    def test_old_changes_to_new(self):
+        search_replace('testfile.txt', 'old', 'new')
+        with open('testfile.txt') as f:
+            assert_equal(f.read(), 'new text\nmore newy\nand then')
+
+    def test_backup_file_is_removed(self):
+        search_replace('testfile.txt', 'old', 'new')
+        nose.tools.assert_false(os.path.isfile('testfile.txt.bak'))
+
+    def test_silently_skips_directories(self):
+        os.mkdir('tempdir')
+        search_replace('tempdir', 'old', 'new')
+        os.rmdir('tempdir')

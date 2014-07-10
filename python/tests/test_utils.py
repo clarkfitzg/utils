@@ -1,7 +1,7 @@
 import os
 import nose
 from nose.tools import assert_equal
-from utils import weighcount, flatten, to_csv, search_replace
+from utils import weighcount, flatten, to_csv, search_replace, rstrip
 
 
 class test_replicate:
@@ -93,3 +93,18 @@ class test_search_replace:
         os.mkdir('tempdir')
         search_replace('tempdir', 'old', 'new')
         os.rmdir('tempdir')
+
+
+class test_rstrip:
+
+    def setup(self):
+        with open('somefile.txt', 'w') as f:
+            f.writelines('\n'.join(['   first  ', '  ', '  third  ']))
+
+    def teardown(self):
+        os.remove('somefile.txt')
+
+    def test_basic_rstrip(self):
+        rstrip('somefile.txt')
+        with open('somefile.txt') as f:
+            assert_equal(f.read(), '   first\n\n  third')

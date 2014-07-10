@@ -148,6 +148,20 @@ def search_replace(filename, old, new):
     os.remove(backup_name)
 
 
+def rstrip(filename):
+    '''
+    Strips all white space from the right side of every line in a file.
+    Useful for pep8 compliance.
+    '''
+    backup_name = filename + '.bak'
+    os.rename(filename, backup_name)
+
+    with open(backup_name) as oldfile, open(filename, 'w') as newfile:
+        newfile.write('\n'.join(line.rstrip() for line in oldfile))
+
+    os.remove(backup_name)
+
+
 def download_many(urls):
     '''
     Download content from many urls at the same time using threading

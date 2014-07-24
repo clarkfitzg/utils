@@ -1,6 +1,8 @@
 # bashrc
 # Clark Fitzgerald
 
+printf '\n    Welcome home, Clark\n\n'
+
 if [ -f /etc/bashrc ]; then
         . /etc/bashrc
 fi
@@ -10,7 +12,8 @@ export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 
 # added by Anaconda 1.8.0 installer
-export PATH="//anaconda/bin:$PATH"
+#export PATH="//anaconda/bin:$PATH"
+export PATH='~/anaconda/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin'
 
 # Add personal utilities to Python path
 export PYTHONPATH=${PYTHONPATH}:~/utils/python

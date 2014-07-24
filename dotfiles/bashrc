@@ -24,7 +24,7 @@ export PYTHONPATH=${PYTHONPATH}:~/utils/python
 #fi
 
 # Use single $ for prompt
-PS1='\W \u$ '
+PS1='\w \$ '
 
 # Aliased commands
 alias tml='tmux list-sessions'

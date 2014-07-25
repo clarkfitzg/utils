@@ -20,12 +20,14 @@ def symlink_dotfiles():
 
     dotfiles = wd + os.sep + 'dotfiles'
 
-    for file in os.listdir(dotfiles):
-        src = dotfiles + os.sep + file
-        dst = home + os.sep + '.' + file
+    for f in os.listdir(dotfiles):
+        src = dotfiles + os.sep + f
+        dst = home + os.sep + '.' + f
         if os.path.isfile(dst) or os.path.islink(dst):
+            print('removing {}'.format(dst))
             os.remove(dst)
         os.symlink(src, dst)
+        print('linking to new {}'.format(dst))
 
 
 if __name__ == '__main__':

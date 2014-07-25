@@ -29,3 +29,4 @@ PS1='\w \$ '
 # Aliased commands
 alias tml='tmux list-sessions'
 alias tma='tmux attach -t'
+alias gpom='git push origin master'

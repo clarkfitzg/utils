@@ -2,12 +2,14 @@
 trix.py
 
 Utility functions for working with matrices in Numpy
+Extending to other statistics
 
 Clark Fitzgerald
 '''
 
 from __future__ import division
 import numpy as np
+from matplotlib import pyplot as plt
 
 
 def matrixij(shape, ij):
@@ -53,3 +55,39 @@ def check_orthonormal(A):
                          '2 dimensional array.')
     else:
         return np.allclose(A.dot(A.T), np.eye(A.shape[0]))
+
+
+def plot_rv_cont(rv, nsamp=100, nruns=5):
+    '''
+    Plot probability distribution for a continous random variable.
+    The line is the probability density function, the histograms are
+    realizations with `nsamp` samples.
+
+    Parameters
+    ----------
+    rv : frozen continuous random variable from scipy.stats
+    nsamp  : number of samples for each run
+    nruns  : number of times to draw nsamp and plot histogram
+    
+    '''
+    # For shading
+    alpha = 1.0 / nruns
+
+    left = rv.median()
+    right = rv.median()
+
+    for i in range(nruns):
+        samps = rv.rvs(nsamp)
+        left = min(left, min(samps))
+        right = max(right, max(samps))
+        plt.hist(samps, normed=True, histtype='stepfilled', alpha=alpha, color='green')
+
+    # Plot pdf only where samples were realized
+    x = np.linspace(left, right, num=100)
+    y = rv.pdf(x)
+    plt.plot(x, y, linewidth=4)
+
+    plt.title('{} distribution'.format(rv.dist.name))
+    plt.show()
+    
+    return plt

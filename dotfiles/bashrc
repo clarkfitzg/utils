@@ -1,7 +1,7 @@
 # bashrc
 # Clark Fitzgerald
 
-printf '\n    Follow the white rabbit\n\n'
+printf '\n    Hi Clark\n\n'
 
 if [ -f /etc/bashrc ]; then
         . /etc/bashrc
@@ -11,13 +11,14 @@ fi
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 
-# added by Anaconda 1.8.0 installer
-#export PATH="//anaconda/bin:$PATH"
-# Set below path to use Python 2
-export PATH='/Users/clark/anaconda/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin'
+# Python 2
+#export PATH='/Users/clark/anaconda/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin'
+
+# Python 3
+export PATH='/Users/clark/anaconda/envs/py3k/bin:/Users/clark/utils/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin'
 
 # Add personal utilities to Python path
-export PYTHONPATH="/Users/clark/projects/statsmodels"
+export PYTHONPATH="/Users/clark/utils/python"
 
 # Make the terminal start with tmux
 #if [[ ! $Term =~ screen ]]; then
@@ -30,4 +31,6 @@ PS1='\w \$ '
 # Aliased commands
 alias tml='tmux list-sessions'
 alias tma='tmux attach -t'
-alias gpom='git push origin master'
+
+# Enables conda install commands
+alias py3k='source activate py3k'

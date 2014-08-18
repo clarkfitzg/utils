@@ -68,10 +68,10 @@ def plot_rv_cont(rv, nsamp=100, nruns=5):
     rv : frozen continuous random variable from scipy.stats
     nsamp  : number of samples for each run
     nruns  : number of times to draw nsamp and plot histogram
-    
+
     '''
-    # For shading
-    alpha = 1.0 / nruns
+    plot_params = {'normed': True, 'histtype': 'stepfilled',
+                   'alpha': 1.0 / nruns, 'color': 'green'}
 
     left = rv.median()
     right = rv.median()
@@ -80,7 +80,7 @@ def plot_rv_cont(rv, nsamp=100, nruns=5):
         samps = rv.rvs(nsamp)
         left = min(left, min(samps))
         right = max(right, max(samps))
-        plt.hist(samps, normed=True, histtype='stepfilled', alpha=alpha, color='green')
+        plt.hist(samps, **plot_params)
 
     # Plot pdf only where samples were realized
     x = np.linspace(left, right, num=100)
@@ -89,5 +89,5 @@ def plot_rv_cont(rv, nsamp=100, nruns=5):
 
     plt.title('{} distribution'.format(rv.dist.name))
     plt.show()
-    
+
     return plt

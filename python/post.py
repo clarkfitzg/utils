@@ -18,7 +18,7 @@ layout: post
 title: {}
 date: {}
 comments: false
-categories: 
+categories:
 ---
 
 '''.format(title, time.strftime("%Y-%m-%d %H:%M"))

@@ -12,18 +12,13 @@ export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 
 # Python 2
-#export PATH='/Users/clark/anaconda/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin'
+#export PATH="$HOME/anaconda/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin"
 
 # Python 3
-export PATH='/Users/clark/anaconda/envs/py3k/bin:/Users/clark/utils/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin'
+export PATH="$HOME/anaconda/envs/py3k/bin:$HOME/utils/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin"
 
 # Add personal utilities to Python path
-export PYTHONPATH="/Users/clark/utils/python"
-
-# Make the terminal start with tmux
-#if [[ ! $Term =~ screen ]]; then
-#    exec tmux
-#fi
+export PYTHONPATH="$HOME/utils/python"
 
 # Use single $ for prompt
 PS1='\w \$ '
@@ -34,3 +29,6 @@ alias tma='tmux attach -t'
 
 # Enables conda install commands
 alias py3k='source activate py3k'
+
+# Start ipython with startup file
+alias ipy="ipython -i ~/.ipython_startup.py"

@@ -8,6 +8,7 @@ Clark Fitzgerald
 '''
 
 from __future__ import division
+
 import numpy as np
 from matplotlib import pyplot as plt
 
@@ -91,3 +92,21 @@ def plot_rv_cont(rv, nsamp=100, nruns=5):
     plt.show()
 
     return plt
+
+
+def replicate(func, n, *args, **kwargs):
+    '''
+    Call func(*args, **kwargs) n times and return results as ndarray
+    Useful for simulating random events
+
+    Similar to R's replicate
+
+    >>> from numpy.random import seed, choice
+    >>> f = lambda x: sum(choice(10, size=x))
+    >>> seed(23)
+    >>> replicate(f, 3, 10)
+    array([65, 39, 40])
+    
+    '''
+    results = [func(*args, **kwargs) for i in range(n)]
+    return np.array(results)

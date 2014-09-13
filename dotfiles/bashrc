@@ -23,6 +23,9 @@ export PYTHONPATH="$HOME/utils/python"
 # Use single $ for prompt
 PS1='\w \$ '
 
+# For working on Scipy using conda environment
+#source activate scipy-dev
+
 ############################################################
 # Aliased commands
 ############################################################

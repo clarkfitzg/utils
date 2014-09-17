@@ -152,7 +152,112 @@ def replicate(func, n, *args, **kwargs):
     >>> seed(23)
     >>> replicate(f, 3, 10)
     array([65, 39, 40])
-    
+
     '''
     results = [func(*args, **kwargs) for i in range(n)]
     return np.array(results)
+
+
+class bootstrap(object):
+    '''
+    Implements a statistical bootstrap by calling statistic on a sample
+    of the same size as the data with replacement.
+
+    Parameters
+    ----------
+    data : ndarray
+        sample data
+    stat : callable
+        function to call on data
+    reps : int
+        Number of repetitions
+    lazy : boolean
+        If lazy = True then this object is an iterator, returning the
+        statistic called on a new sample each time.
+
+    Attributes
+    ----------
+    actual : numeric
+        The actual value of the statistic called on the data
+
+    References
+    ----------
+    Wasserman, All of Statistics, 2005
+    '''
+
+    def __init__(self, data, stat=np.mean, reps=10, lazy=False):
+        self.data = data
+        self.samplesize = len(data)
+        self.stat = stat
+        self.reps = reps
+        self.reps_remain = reps
+        self.actual = stat(data)
+        if not lazy:
+            self._run()
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.reps_remain <= 0:
+            raise StopIteration
+        else:
+            # Decrement and return statistic applied to bootstrap sample
+            self.reps_remain -= 1
+            bootsample = np.random.choice(self.data, self.samplesize)
+            return self.stat(bootsample)
+
+    def __len__(self):
+        return self.reps
+
+    def _run(self):
+        '''
+        Run the bootstrap simulation.
+
+        If lazy = False (the default) then this will run on instantiation,
+        creating the results arribute.
+        '''
+        self.results = np.array([stat for stat in self])
+
+    def stderr(self):
+        '''
+        Compute the sample standard error of the bootstrapped statistic.
+        This is the standard deviation of `results` attribute.
+
+        Returns
+        -------
+        std_error : float
+
+        Examples
+        --------
+        >>> np.random.seed(321)
+        >>> b = bootstrap(np.random.randn(100), stat=np.mean, reps=100)
+        >>> b.stderr()
+        0.099805501974072466
+
+        '''
+        try:
+            return np.std(self.results)
+        except AttributeError:
+            raise AttributeError("The bootstrap results are not available. "
+                                 "Try using bootstrap with lazy=False.")
+
+    def waldtest(hypothesis):
+        '''
+
+        Parameters
+        ----------
+        hypothesis : float
+            statistical parameter that's being tested against
+        '''
+        pass
+
+    def confidence(n=1000):
+        '''
+        return a confidence interval
+        '''
+        pass
+
+
+if __name__ == '__main__':
+    b = bootstrap(np.random.randn(100))

@@ -1,4 +1,4 @@
-" Vimrc 
+" Vimrc
 " Clark Fitzgerald
 "
 " Set the colorscheme and font
@@ -31,3 +31,14 @@ set foldmethod=indent
 nnoremap <Space> za
 vnoremap <Space> zf
 set foldnestmax=2
+
+" Highlight trailing whitespace
+"match Todo /\s\+$/
+
+
+""""""""""""""""""""""""""""""""""""""""
+""" Macros
+""""""""""""""""""""""""""""""""""""""""
+
+" Remove all trailing whitespace in file
+let @w = ':%s/\s\+$//'

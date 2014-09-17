@@ -4,7 +4,8 @@ trix.py
 Utility functions for working with matrices in Numpy
 Extending to other statistics
 
-Clark Fitzgerald
+Author: Clark Fitzgerald
+License: BSD 3-clause
 '''
 
 from __future__ import division
@@ -29,8 +30,28 @@ def matrixij(shape, ij):
 
 def matrixbasis(n, m):
     '''
-    Generates a basis for a vector space of n x m matrices
+    Generator yielding a basis for a vector space of n x m 2d arrays.
+    Set n=1 to yield a basis of m dimensional vectors
 
+    Parameters
+    ----------
+    n : int
+        Number of rows in matrix
+    m : int
+        Number of columns in matrix
+
+    Returns
+    -------
+    basis : Generator
+        Yields matrix with 1 in position (i, j), and zeros elsewhere.
+        Cycles through rows first.
+
+    See Also
+    --------
+    matrixij : Returns single a single matrix
+
+    Examples
+    --------
     >>> list(matrixbasis(1, 2))
     [array([[1, 0]]), array([[0, 1]])]
 
@@ -42,11 +63,22 @@ def matrixbasis(n, m):
 
 def check_orthonormal(A):
     '''
-    Return true if a 2 dimensional array A is numerically orthonormal
+    Returns True if a 2 dimensional array is numerically orthonormal.
 
+    Parameters
+    ----------
+    A : ndarray
+        array to be checked
+
+    Returns
+    -------
+    orthonormal : Boolean
+        True if orthonormal, otherwise False
+
+    Examples
+    --------
     >>> check_orthonormal(np.array([[0, 1], [1, 0]]))
     True
-
     >>> check_orthonormal(np.array([[0, 3], [1, 0]]))
     False
 
@@ -54,8 +86,8 @@ def check_orthonormal(A):
     if A.ndim != 2:
         raise ValueError('This function can only be called on a '
                          '2 dimensional array.')
-    else:
-        return np.allclose(A.dot(A.T), np.eye(A.shape[0]))
+
+    return np.allclose(A.dot(A.T), np.eye(A.shape[0]))
 
 
 def plot_rv_cont(rv, nsamp=100, nruns=5):
@@ -96,11 +128,25 @@ def plot_rv_cont(rv, nsamp=100, nruns=5):
 
 def replicate(func, n, *args, **kwargs):
     '''
-    Call func(*args, **kwargs) n times and return results as ndarray
-    Useful for simulating random events
+    Call func(*args, **kwargs) n times and return results as ndarray.
+    Simulates random events, similar to R's replicate.
 
-    Similar to R's replicate
+    Parameters
+    ----------
+    func : callable
+        Function involving random events
+    n : int
+        Number of times to call `func`
+    *args, **kwargs : arguments
+        Additional arguments for `func`
 
+    Returns
+    -------
+    results : ndarray
+        Each row is the result of calling func
+
+    Examples
+    --------
     >>> from numpy.random import seed, choice
     >>> f = lambda x: sum(choice(10, size=x))
     >>> seed(23)

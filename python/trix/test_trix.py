@@ -1,6 +1,5 @@
 import numpy as np
-from numpy.testing import assert_equal
-from nose.tools import raises
+from numpy.testing import assert_equal, raises
 from trix import check_orthonormal, plot_rv_cont, replicate
 
 

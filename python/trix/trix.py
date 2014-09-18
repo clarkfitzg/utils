@@ -11,7 +11,8 @@ License: BSD 3-clause
 from __future__ import division
 
 import numpy as np
-from matplotlib import pyplot as plt
+from scipy import stats
+import matplotlib.pyplot as plt
 
 
 def matrixij(shape, ij):
@@ -242,7 +243,7 @@ class bootstrap(object):
             raise AttributeError("The bootstrap results are not available. "
                                  "Try using bootstrap with lazy=False.")
 
-    def waldtest(hypothesis):
+    def waldtest(self, hypothesis):
         '''
 
         Parameters
@@ -252,11 +253,50 @@ class bootstrap(object):
         '''
         pass
 
-    def confidence(n=1000):
+    def confidence(self, percent=95, method='normal'):
         '''
-        return a confidence interval
+        Compute a confidence interval. 
+
+        Parameters
+        ----------
+        percent : numeric
+            Number between 0 and 100 indicating desired size of interval
+        method : string
+            'normal' : assumes that the distribution of the bootstrapped 
+                statistic is normal.
+            'pivotal' : 
+
+        Returns
+        -------
+        lower, upper : ndarray of float
+            lower and upper bounds for the confidence interval
+
+        See Also
+        --------
+        stats.<distribution>.interval : Compute exact interval when distribution
+            is known.
+
+        Examples
+        --------
+        >>> np.random.seed(321)
+        >>> b = bootstrap(np.random.randn(100), stat=np.mean, reps=100)
+
+        Higher confidence generally implies larger intervals.
+
+        >>> b.confidence(50, method='normal')
+        array([-0.70899958,  0.63997992])
+        >>> b.confidence(99, method='normal')
+        array([-2.61033914,  2.54131947])
+
+        Different methods will produce different results.
+
+        >>> b.confidence(99, method='pivotal')
+        array([-2.61033914,  2.54131947])
         '''
-        pass
+        alpha = percent / 100
+
+        if method == 'normal':
+            return self.actual + np.array(stats.norm.interval(alpha))
 
 
 if __name__ == '__main__':

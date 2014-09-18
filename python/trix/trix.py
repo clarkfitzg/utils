@@ -180,6 +180,10 @@ class bootstrap(object):
     ----------
     actual : numeric
         The actual value of the statistic called on the data
+    results : ndarray
+        sorted array with shape (reps, 1) holding results of bootstrapped
+        statistic
+        
 
     References
     ----------
@@ -219,6 +223,7 @@ class bootstrap(object):
         creating the results arribute.
         '''
         self.results = np.array([stat for stat in self])
+        self.results.sort()
 
     def stderr(self):
         '''
@@ -253,7 +258,7 @@ class bootstrap(object):
         '''
         pass
 
-    def confidence(self, percent=95, method='normal'):
+    def confidence(self, percent=95, method='percentile'):
         '''
         Compute a confidence interval. 
 
@@ -262,9 +267,11 @@ class bootstrap(object):
         percent : numeric
             Number between 0 and 100 indicating desired size of interval
         method : string
+            'percentile' : Uses percentage point function applied to empirical
+                distribution of results.
             'normal' : assumes that the distribution of the bootstrapped 
                 statistic is normal.
-            'pivotal' : 
+            'pivotal' : Not yet implemented
 
         Returns
         -------
@@ -273,8 +280,8 @@ class bootstrap(object):
 
         See Also
         --------
-        stats.<distribution>.interval : Compute exact interval when distribution
-            is known.
+        stats.<distribution>.interval : Compute exact interval around median
+        when distribution is known.
 
         Examples
         --------
@@ -283,21 +290,38 @@ class bootstrap(object):
 
         Higher confidence generally implies larger intervals.
 
-        >>> b.confidence(50, method='normal')
+        >>> b.confidence(50)
         array([-0.70899958,  0.63997992])
-        >>> b.confidence(99, method='normal')
+        >>> b.confidence(99)
         array([-2.61033914,  2.54131947])
 
         Different methods will produce different results.
 
-        >>> b.confidence(99, method='pivotal')
+        >>> b.confidence(99, method='normal')
         array([-2.61033914,  2.54131947])
+
         '''
         alpha = percent / 100
 
-        if method == 'normal':
+        if method == 'percentile':
+            pass
+
+        elif method == 'normal':
             return self.actual + np.array(stats.norm.interval(alpha))
 
 
+def frac_above(array, bound, how='strict'):
+    '''
+    What fraction of the array is above the bound?
+
+    >>> frac_above(np.array([0, 1, 3, 5]), 1)
+    0.5
+
+    '''
+    if how == 'strict':
+        return sum(array > bound) / array.size
+
+
 if __name__ == '__main__':
+
     b = bootstrap(np.random.randn(100))

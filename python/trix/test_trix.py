@@ -40,7 +40,7 @@ class test_replicate:
 class test_bootstrap():
 
     def test_iter_value(self):
-        actual = bootstrap(np.ones(5), lazy=True)
+        actual = bootstrap(np.ones(5), reps=3, lazy=True)
         assert_equal(1.0, next(actual))
 
     def test_iter_decrements_reps(self):
@@ -54,8 +54,8 @@ class test_bootstrap():
         assert_equal([1] * 5, actual)
 
     def test_len(self):
-        actual = bootstrap(np.ones(5), reps=50)
-        assert_equal(50, len(actual))
+        actual = bootstrap(np.ones(5), reps=5)
+        assert_equal(5, len(actual))
 
     @raises(StopIteration)
     def test_doesnt_iterate_infinitely(self):
@@ -72,5 +72,10 @@ class test_bootstrap():
         actual.stderr()
 
     def test_actual_available(self):
-        b = bootstrap(np.ones(5))
+        b = bootstrap(np.ones(5), reps=3)
         assert_equal(b.actual, 1)
+
+    def test_sorts_results_array(self):
+        np.random.seed(20)
+        b = bootstrap(np.arange(20), reps=10)
+        assert_equal(b.results, sorted(b.results))

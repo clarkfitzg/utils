@@ -57,6 +57,11 @@ class test_bootstrap():
         actual = bootstrap(np.ones(5), reps=5)
         assert_equal(5, len(actual))
 
+    def test_repr(self):
+        r = repr(bootstrap(np.ones(5), stat=np.mean, reps=5))
+        for string in ['stat', 'mean', 'reps', '5']:
+            assert string in r
+
     @raises(StopIteration)
     def test_doesnt_iterate_infinitely(self):
         b = bootstrap(np.ones(5))

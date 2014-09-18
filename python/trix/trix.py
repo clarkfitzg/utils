@@ -202,8 +202,13 @@ class bootstrap(object):
         self.reps = reps
         self._reps_remain = reps
         self.actual = stat(data)
+        self.lazy = lazy
         if not lazy:
             self._run()
+
+    def __repr__(self):
+        return ''.join(['bootstrap(data, stat=', self.stat.__name__, ', reps=',
+                        str(self.reps), ', lazy=', str(self.lazy), ')'])
 
     def __iter__(self):
         return self

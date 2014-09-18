@@ -307,27 +307,25 @@ class bootstrap(object):
 
         Higher confidence generally implies larger intervals.
 
-        TODO - Check math here
-        #>>> b.confidence(50)
-        #array([-0.70899958,  0.63997992])
-        #>>> b.confidence(99)
-        #array([-2.61033914,  2.54131947])
+        >>> b.confidence(50)
+        array([-0.10479162,  0.02798614])
+        >>> b.confidence(99)
+        array([-0.25964484,  0.2575893 ])
 
         Different methods will produce different results.
 
         >>> b.confidence(99, method='normal')
-        array([-2.61033914,  2.54131947])
+        array([-0.29159177,  0.2225721 ])
 
         '''
-        alpha = percent / 100
-
         if method == 'percentile':
-            proportiontocut = (1 - alpha) / 2
-            trimmed = stats.trimboth(self.results, proportiontocut)
-            return np.array((min(trimmed), max(trimmed)))
+            diff = (100 - percent) / 2
+            return np.percentile(self.results, [diff, 100 - diff])
 
         elif method == 'normal':
-            return self.actual + np.array(stats.norm.interval(alpha))
+            alpha = percent / 100
+            normdist = stats.norm(self.actual, self.stderror())
+            return np.array(normdist.interval(alpha))
 
 
 def frac_above(array, bound, how='strict'):
@@ -344,4 +342,5 @@ def frac_above(array, bound, how='strict'):
 
 if __name__ == '__main__':
 
-    b = bootstrap(np.random.randn(100), lazy=True)
+    np.random.seed(10)
+    b = bootstrap(np.random.randn(100))

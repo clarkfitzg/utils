@@ -1,5 +1,5 @@
 import numpy as np
-from numpy.testing import assert_equal, raises
+from numpy.testing import assert_equal, raises, assert_raises_regex
 from trix import check_orthonormal, replicate, bootstrap
 
 
@@ -46,7 +46,7 @@ class test_bootstrap():
     def test_iter_decrements_reps(self):
         actual = bootstrap(np.ones(5), reps=50, lazy=True)
         next(actual)
-        assert_equal(49, actual.reps_remain)
+        assert_equal(49, actual._reps_remain)
 
     def test_list_comprehension(self):
         b = bootstrap(np.ones(5), np.mean, reps=5, lazy=True)
@@ -66,10 +66,13 @@ class test_bootstrap():
         actual = bootstrap(np.ones(5), reps=10)
         assert_equal(np.ones(10), actual.results)
 
-    @raises(AttributeError)
     def test_cant_compute_standard_error_without_results(self):
         actual = bootstrap(np.ones(5), lazy=True)
-        actual.stderr()
+        assert_raises_regex(AttributeError, 'stderror', actual.stderror)
+
+    def test_cant_compute_confidence_without_results(self):
+        actual = bootstrap(np.ones(5), lazy=True)
+        assert_raises_regex(AttributeError, 'confidence', actual.confidence)
 
     def test_actual_available(self):
         b = bootstrap(np.ones(5), reps=3)

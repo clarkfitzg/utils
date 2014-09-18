@@ -9,6 +9,7 @@ License: BSD 3-clause
 '''
 
 from __future__ import division
+import functools
 
 import numpy as np
 from scipy import stats
@@ -161,8 +162,8 @@ def replicate(func, n, *args, **kwargs):
 
 class bootstrap(object):
     '''
-    Implements a statistical bootstrap by calling statistic on a sample
-    of the same size as the data with replacement.
+    Implements a statistical bootstrap by calling a statistical function on
+    a sample of the same size as the data with replacement.
 
     Parameters
     ----------
@@ -184,18 +185,22 @@ class bootstrap(object):
         sorted array with shape (reps, 1) holding results of bootstrapped
         statistic
         
+    Methods
+    -------
+    stderror : float
+        computes standard error (standard deviation) of results
 
     References
     ----------
     Wasserman, All of Statistics, 2005
     '''
 
-    def __init__(self, data, stat=np.mean, reps=10, lazy=False):
+    def __init__(self, data, stat=np.mean, reps=1000, lazy=False):
         self.data = data
         self.samplesize = len(data)
         self.stat = stat
         self.reps = reps
-        self.reps_remain = reps
+        self._reps_remain = reps
         self.actual = stat(data)
         if not lazy:
             self._run()
@@ -204,11 +209,11 @@ class bootstrap(object):
         return self
 
     def __next__(self):
-        if self.reps_remain <= 0:
+        if self._reps_remain <= 0:
             raise StopIteration
         else:
             # Decrement and return statistic applied to bootstrap sample
-            self.reps_remain -= 1
+            self._reps_remain -= 1
             bootsample = np.random.choice(self.data, self.samplesize)
             return self.stat(bootsample)
 
@@ -225,7 +230,22 @@ class bootstrap(object):
         self.results = np.array([stat for stat in self])
         self.results.sort()
 
-    def stderr(self):
+    def _notlazy(func):
+        '''
+        Decorator to raise AttributeError with informative error message in
+        case users try to use code which is not lazy.
+        '''
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+             try:
+                return func(*args, **kwargs)
+             except AttributeError:
+                raise AttributeError("{} is not available. Try using bootstrap "
+                                     "with lazy=False.".format(func.__name__))
+        return wrapper
+
+    @_notlazy
+    def stderror(self):
         '''
         Compute the sample standard error of the bootstrapped statistic.
         This is the standard deviation of `results` attribute.
@@ -238,15 +258,11 @@ class bootstrap(object):
         --------
         >>> np.random.seed(321)
         >>> b = bootstrap(np.random.randn(100), stat=np.mean, reps=100)
-        >>> b.stderr()
+        >>> b.stderror()
         0.099805501974072466
 
         '''
-        try:
-            return np.std(self.results)
-        except AttributeError:
-            raise AttributeError("The bootstrap results are not available. "
-                                 "Try using bootstrap with lazy=False.")
+        return np.std(self.results)
 
     def waldtest(self, hypothesis):
         '''
@@ -258,6 +274,7 @@ class bootstrap(object):
         '''
         pass
 
+    @_notlazy
     def confidence(self, percent=95, method='percentile'):
         '''
         Compute a confidence interval. 
@@ -290,10 +307,11 @@ class bootstrap(object):
 
         Higher confidence generally implies larger intervals.
 
-        >>> b.confidence(50)
-        array([-0.70899958,  0.63997992])
-        >>> b.confidence(99)
-        array([-2.61033914,  2.54131947])
+        TODO - Check math here
+        #>>> b.confidence(50)
+        #array([-0.70899958,  0.63997992])
+        #>>> b.confidence(99)
+        #array([-2.61033914,  2.54131947])
 
         Different methods will produce different results.
 
@@ -304,7 +322,9 @@ class bootstrap(object):
         alpha = percent / 100
 
         if method == 'percentile':
-            pass
+            proportiontocut = (1 - alpha) / 2
+            trimmed = stats.trimboth(self.results, proportiontocut)
+            return np.array((min(trimmed), max(trimmed)))
 
         elif method == 'normal':
             return self.actual + np.array(stats.norm.interval(alpha))
@@ -324,4 +344,4 @@ def frac_above(array, bound, how='strict'):
 
 if __name__ == '__main__':
 
-    b = bootstrap(np.random.randn(100))
+    b = bootstrap(np.random.randn(100), lazy=True)

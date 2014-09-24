@@ -160,189 +160,37 @@ def replicate(func, n, *args, **kwargs):
     return np.array(results)
 
 
-class bootstrap(object):
+def cdf(array, x):
     '''
-    Implements a statistical bootstrap by calling a statistical function on
-    a sample of the same size as the data with replacement.
+    Cumulative distribution function evaluated at x using array as an
+    empirical probability distribution. 
+    
+    Imitates API of scipy.stats.<distribution>.
+    '''
+    pass
 
+
+def empirical(array, bins=1000):
+    '''
+    Creates an approximate empirical probability distribution through binning.
+ 
     Parameters
     ----------
-    data : ndarray
-        sample data
-    stat : callable
-        function to call on data
-    reps : int
-        Number of repetitions
-    lazy : boolean
-        If lazy = True then this object is an iterator, returning the
-        statistic called on a new sample each time.
+    array : array_like
+        1 dimensional array
+    bins : int
+        Number of bins
 
-    Attributes
-    ----------
-    actual : numeric
-        The actual value of the statistic called on the data
-    results : ndarray
-        sorted array with shape (reps, 1) holding results of bootstrapped
-        statistic
-        
-    Methods
+    Returns
     -------
-    stderror : float
-        computes standard error (standard deviation) of results
+    rv : rv_discrete
+        instance of scipy.stats.rv_discrete approximating the distribution
+        of array
 
-    References
-    ----------
-    Wasserman, All of Statistics, 2005
+    Examples
+    --------
     '''
-
-    def __init__(self, data, stat=np.mean, reps=1000, lazy=False):
-        self.data = data
-        self.samplesize = len(data)
-        self.stat = stat
-        self.reps = reps
-        self._reps_remain = reps
-        self.actual = stat(data)
-        self.lazy = lazy
-        if not lazy:
-            self._run()
-
-    def __repr__(self):
-        return ''.join(['bootstrap(data, stat=', self.stat.__name__, ', reps=',
-                        str(self.reps), ', lazy=', str(self.lazy), ')'])
-
-    def __iter__(self):
-        return self
-
-    def __next__(self):
-        if self._reps_remain <= 0:
-            raise StopIteration
-        else:
-            # Decrement and return statistic applied to bootstrap sample
-            self._reps_remain -= 1
-            bootsample = np.random.choice(self.data, self.samplesize)
-            return self.stat(bootsample)
-
-    def __len__(self):
-        return self.reps
-
-    def _run(self):
-        '''
-        Run the bootstrap simulation.
-
-        If lazy = False (the default) then this will run on instantiation,
-        creating the results arribute.
-        '''
-        self.results = np.array([stat for stat in self])
-        self.results.sort()
-
-    def _notlazy(func):
-        '''
-        Decorator to raise AttributeError with informative error message in
-        case users try to use code which is not lazy.
-        '''
-        @functools.wraps(func)
-        def wrapper(*args, **kwargs):
-             try:
-                return func(*args, **kwargs)
-             except AttributeError:
-                raise AttributeError("{} is not available. Try using bootstrap "
-                                     "with lazy=False.".format(func.__name__))
-        return wrapper
-
-    @_notlazy
-    def stderror(self):
-        '''
-        Compute the sample standard error of the bootstrapped statistic.
-        This is the standard deviation of `results` attribute.
-
-        Returns
-        -------
-        std_error : float
-
-        Examples
-        --------
-        >>> np.random.seed(321)
-        >>> b = bootstrap(np.random.randn(100), stat=np.mean, reps=100)
-        >>> b.stderror()
-        0.099805501974072466
-
-        '''
-        return np.std(self.results)
-
-    def waldtest(self, hypothesis):
-        '''
-
-        Parameters
-        ----------
-        hypothesis : float
-            statistical parameter that's being tested against
-        '''
-        pass
-
-    @_notlazy
-    def confidence(self, percent=95, method='percentile'):
-        '''
-        Compute a confidence interval. 
-
-        Parameters
-        ----------
-        percent : numeric
-            Number between 0 and 100 indicating desired size of interval
-        method : string
-            'percentile' : Uses percentage point function applied to empirical
-                distribution of results.
-            'normal' : assumes that the distribution of the bootstrapped 
-                statistic is normal.
-            'pivotal' : Not yet implemented
-
-        Returns
-        -------
-        lower, upper : ndarray of float
-            lower and upper bounds for the confidence interval
-
-        See Also
-        --------
-        stats.<distribution>.interval : Compute exact interval around median
-        when distribution is known.
-
-        Examples
-        --------
-        >>> np.random.seed(321)
-        >>> b = bootstrap(np.random.randn(100), stat=np.mean, reps=100)
-
-        Higher confidence generally implies larger intervals.
-
-        >>> b.confidence(50)
-        array([-0.10479162,  0.02798614])
-        >>> b.confidence(99)
-        array([-0.25964484,  0.2575893 ])
-
-        Different methods will produce different results.
-
-        >>> b.confidence(99, method='normal')
-        array([-0.29159177,  0.2225721 ])
-
-        '''
-        if method == 'percentile':
-            diff = (100 - percent) / 2
-            return np.percentile(self.results, [diff, 100 - diff])
-
-        elif method == 'normal':
-            alpha = percent / 100
-            normdist = stats.norm(self.actual, self.stderror())
-            return np.array(normdist.interval(alpha))
-
-
-def frac_above(array, bound, how='strict'):
-    '''
-    What fraction of the array is above the bound?
-
-    >>> frac_above(np.array([0, 1, 3, 5]), 1)
-    0.5
-
-    '''
-    if how == 'strict':
-        return sum(array > bound) / array.size
+    pass
 
 
 if __name__ == '__main__':

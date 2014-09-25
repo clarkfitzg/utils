@@ -419,9 +419,3 @@ def rv_discrete_factory(a):
     vals, counts = np.unique(a, return_counts=True)
     probs = counts / sum(counts)
     return stats.rv_discrete(values=(vals, probs))
-
-
-if __name__ == '__main__':
-
-    np.random.seed(10)
-    b = bootstrap(np.random.randn(100))

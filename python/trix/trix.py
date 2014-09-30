@@ -128,6 +128,13 @@ def plot_rv_cont(rv, nsamp=100, nruns=5):
     return plt
 
 
+def rep2(func, n, *args, **kwargs):
+    output = np.zeros(n)
+    for i in range(n):
+        output[i] = func(*args, **kwargs)
+    return output
+
+
 def replicate(func, n, *args, **kwargs):
     '''
     Call func(*args, **kwargs) n times and return results as ndarray.

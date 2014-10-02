@@ -1,7 +1,7 @@
 # bashrc
 # Clark Fitzgerald
 
-printf '\n    Hi Clark\n\n'
+printf '\n    Learn more theory you!\n\n'
 
 if [ -f /etc/bashrc ]; then
         . /etc/bashrc

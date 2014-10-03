@@ -10,6 +10,7 @@ License: BSD 3-clause
 
 from __future__ import division
 import functools
+from collections import namedtuple
 
 import numpy as np
 from scipy import stats
@@ -128,13 +129,6 @@ def plot_rv_cont(rv, nsamp=100, nruns=5):
     return plt
 
 
-def rep2(func, n, *args, **kwargs):
-    output = np.zeros(n)
-    for i in range(n):
-        output[i] = func(*args, **kwargs)
-    return output
-
-
 def replicate(func, n, *args, **kwargs):
     '''
     Call func(*args, **kwargs) n times and return results as ndarray.
@@ -165,6 +159,16 @@ def replicate(func, n, *args, **kwargs):
     '''
     results = [func(*args, **kwargs) for i in range(n)]
     return np.array(results)
+
+
+def rep2(func, n, *args, **kwargs):
+    '''
+    trying to make above replicate faster
+    '''
+    output = np.zeros(n)
+    for i in range(n):
+        output[i] = func(*args, **kwargs)
+    return output
 
 
 class bootstrap(object):
@@ -426,3 +430,7 @@ def rv_discrete_factory(a):
     vals, counts = np.unique(a, return_counts=True)
     probs = counts / sum(counts)
     return stats.rv_discrete(values=(vals, probs))
+
+
+confidence = namedtuple('confidence', ('lower', 'estimate', 'upper',
+                        'percent'))

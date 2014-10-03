@@ -1,6 +1,6 @@
 import numpy as np
 from numpy.testing import assert_equal, raises, assert_raises_regex
-from trix import check_orthonormal, replicate, bootstrap
+from trix import check_orthonormal, replicate, bootstrap, confidence
 
 
 class test_check_orthonormal:
@@ -98,3 +98,9 @@ class test_bootstrap():
         np.random.seed(12)
         actual = bootstrap(np.arange(5), reps=10)
         assert_equal(actual.pvalue(0), 0.0014092280634330973)
+
+
+def test_confidence():
+    actual = confidence(1, 2, 3, 4)
+    for i, name in enumerate(('lower', 'estimate', 'upper', 'percent')):
+        assert_equal(actual[i], getattr(actual, name))

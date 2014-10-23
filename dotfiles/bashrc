@@ -15,7 +15,7 @@ export LSCOLORS=ExFxCxDxBxegedabagacad
 #export PATH="$HOME/anaconda/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin"
 
 # Python 3
-export PATH="$HOME/anaconda/envs/py3k/bin:$HOME/utils/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin"
+export PATH="$HOME/anaconda3/bin:$HOME/utils/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin"
 
 # Add personal utilities to Python path
 export PYTHONPATH="$HOME/utils/python"

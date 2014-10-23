@@ -1,7 +1,7 @@
 # bashrc
 # Clark Fitzgerald
 
-printf '\n    Learn more theory you!\n\n'
+#printf '\n    Learn more theory you!\n\n'
 
 if [ -f /etc/bashrc ]; then
         . /etc/bashrc
@@ -20,8 +20,9 @@ export PATH="$HOME/anaconda/envs/py3k/bin:$HOME/utils/bin:/usr/bin:/bin:/usr/sbi
 # Add personal utilities to Python path
 export PYTHONPATH="$HOME/utils/python"
 
-# Use single $ for prompt
-PS1='\w \$ '
+# Prompt is 
+# \h hostname \w working directory $
+PS1='\h \w \$ '
 
 # For working on Scipy using conda environment
 #source activate scipy-dev

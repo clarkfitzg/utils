@@ -24,10 +24,10 @@ def symlink_dotfiles():
         src = dotfiles + os.sep + f
         dst = home + os.sep + '.' + f
         if os.path.isfile(dst) or os.path.islink(dst):
-            print('removing {}'.format(dst))
+            #print('removing {}'.format(dst))
             os.remove(dst)
         os.symlink(src, dst)
-        print('linking to new {}'.format(dst))
+        #print('linking to new {}'.format(dst))
 
 
 if __name__ == '__main__':

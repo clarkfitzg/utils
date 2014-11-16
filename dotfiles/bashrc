@@ -31,6 +31,10 @@ PS1='\h \w \$ '
 # Aliased commands
 ############################################################
 
+# Julia
+alias julia="exec
+'/Applications/Julia-0.3.2.app/Contents/Resources/julia/bin/julia'"
+
 # Git 
 alias gst='git status'
 alias gcom='git commit -m'

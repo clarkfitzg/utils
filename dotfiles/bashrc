@@ -24,6 +24,8 @@ export PYTHONPATH="$HOME/utils/python"
 # \h hostname \w working directory $
 PS1='\h \w \$ '
 
+export EDITOR="vim"
+
 # For working on Scipy using conda environment
 #source activate scipy-dev
 
@@ -45,6 +47,7 @@ alias tma='tmux attach -t'
 
 # Run current version of Macvim
 alias mvim='mvim -v'
+alias vi='mvim -v'
 
 # Enables conda install commands
 alias py3k='source activate py3k'

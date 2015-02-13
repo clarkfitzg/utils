@@ -434,3 +434,16 @@ def rv_discrete_factory(a):
 
 confidence = namedtuple('confidence', ('lower', 'estimate', 'upper',
                         'percent'))
+
+
+def abgamma(alpha, beta):
+    '''
+    `scipy.stats.gamma` distribution parameterized with alpha and beta
+    rather than shape and scale
+
+    >>> rv1 = abgamma(alpha=1, beta=2)
+    >>> rv2 = stats.gamma(
+
+    Useful for Bayesian statistics
+    '''
+    pass

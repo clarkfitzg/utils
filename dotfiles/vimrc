@@ -14,7 +14,10 @@ set shiftwidth=4
 
 " To use Python mode
 "filetype off
-"call pathogen#infect()
+
+" Tim Pope's Package installer
+
+execute pathogen#infect()
 "call pathogen#helptags()
 
 filetype plugin indent on
@@ -38,33 +41,14 @@ set foldnestmax=2
 " Text width
 set tw=75
 
+" Vim slime
+let g:slime_target = "tmux"
+let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
+let g:slime_python_ipython = 1
+
 """"""""""""""""""""""""""""""""""""""""
 """ Macros
 """"""""""""""""""""""""""""""""""""""""
 
 " Remove all trailing whitespace in file
 let @w = ':%s/\s\+$//'
-
-
-""""""""""""""""""""""""""""""""""""""""
-" Don't map '_' to '<-'
-let vimrplugin_assign = 0
-
-" Lines added by the Vim-R-plugin command :RpluginConfig (2014-Oct-24 22:34):
-filetype plugin on
-" Change the <LocalLeader> key:
-let maplocalleader = ","
-" Use Ctrl+Space to do omnicompletion:
-if has("gui_running")
-    inoremap <C-Space> <C-x><C-o>
-else
-    inoremap <Nul> <C-x><C-o>
-endif
-" Press the space bar to send lines (in Normal mode) and selections to R:
-"vmap <Space> <Plug>RDSendSelection
-"nmap <Space> <Plug>RDSendLine
-
-" Force Vim to use 256 colors if running in a capable terminal emulator:
-if &term =~ "xterm" || &term =~ "256" || $DISPLAY != "" || $HAS_256_COLORS == "yes"
-    set t_Co=256
-endif

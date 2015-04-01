@@ -8,8 +8,8 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # Trying to get the files in color.
-export CLICOLOR=1
-export LSCOLORS=ExFxCxDxBxegedabagacad
+#export CLICOLOR=1
+#export LS_COLORS=ExFxCxDxBxegedabagacad
 
 # Python 2
 #export PATH="$HOME/anaconda/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin"
@@ -39,15 +39,14 @@ alias julia="exec
 
 # Git 
 alias gst='git status'
-alias gcom='git commit -m'
 
 # Tmux
 alias tml='tmux list-sessions'
 alias tma='tmux attach -t'
 
 # Run current version of Macvim
-alias mvim='mvim -v'
-alias vi='mvim -v'
+#alias mvim='mvim -v'
+#alias vi='mvim -v'
 
 # Enables conda install commands
 alias py3k='source activate py3k'
@@ -57,34 +56,3 @@ alias ipy="ipython -i ~/.ipython_startup.py"
 
 # Run nosetests with doctests
 alias nt="nosetests --with-doctest"
-
-# Lines added by the Vim-R-plugin command :RpluginConfig (2014-Oct-24 22:36):
-# Change the TERM environment variable (to get 256 colors) and make Vim
-# connecting to X Server even if running in a terminal emulator (to get
-# dynamic update of syntax highlight and Object Browser):
-#if [ "$TERM" = "xterm" ] || [ "$TERM" = "xterm-256color" ]
-#then
-#    export TERM=xterm-256color
-#    export HAS_256_COLORS=yes
-#fi
-#if [ "$TERM" = "screen" ] && [ "$HAS_256_COLORS" = "yes" ]
-#then
-#    export TERM=screen-256color
-#fi
-#if [ "x$DISPLAY" != "x" ]
-#then
-#    alias vim="vim --servername VIM"
-#    if [ "$HAS_256_COLORS" = "yes" ]
-#    then
-#        function tvim(){ tmux new-session "TERM=screen-256color vim --servername VIM $@" ; }
-#    else
-#        function tvim(){ tmux new-session "vim --servername VIM $@" ; }
-#    fi
-#else
-#    if [ "$HAS_256_COLORS" = "yes" ]
-#    then
-#        function tvim(){ tmux new-session "TERM=screen-256color vim $@" ; }
-#    else
-#        function tvim(){ tmux new-session "vim $@" ; }
-#    fi
-#fi

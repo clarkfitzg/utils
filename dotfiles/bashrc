@@ -13,7 +13,7 @@ export CLICOLOR=1
 #export LS_COLORS=ExFxCxDxBxegedabagacad
 
 # For Ubuntu:
-LS_COLORS=$LS_COLORS:'di=0;35:' ; export LS_COLORS
+LS_COLORS=$LS_COLORS:'di=0;36:' ; export LS_COLORS
 
 # Python 2
 #export PATH="$HOME/anaconda/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin"

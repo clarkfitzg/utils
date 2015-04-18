@@ -37,8 +37,8 @@ export EDITOR="vim"
 # Aliased commands
 ############################################################
 
-# Show ls colors
-alias ls='ls --color=auto'
+# Show ls colors - Needed for Ubuntu
+#alias ls='ls --color=auto'
 
 # Julia
 alias julia="exec

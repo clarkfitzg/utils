@@ -24,6 +24,9 @@ export PATH="$HOME/anaconda3/bin:$HOME/utils/bin:/usr/bin:/bin:/usr/sbin:/sbin:/
 # Add personal utilities to Python path
 export PYTHONPATH="$HOME/utils/python"
 
+# Working on climatology stuff
+export PYTHONPATH="/Users/$LOGNAME/dev/climatology-research/library/python"
+
 # Prompt is 
 # \h hostname \w working directory $
 PS1='\h \w \$ '

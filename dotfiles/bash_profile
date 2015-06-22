@@ -5,3 +5,6 @@
 
 # added by Anaconda3 2.1.0 installer
 export PATH="/Users/clark/anaconda/bin:$PATH"
+
+# added by Anaconda 2.2.0 installer
+export PATH="/Users/clark.fitzgerald/anaconda/bin:$PATH"

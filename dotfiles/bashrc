@@ -43,6 +43,11 @@ export EDITOR="vim"
 # Show ls colors - Needed for Ubuntu
 #alias ls='ls --color=auto'
 
+# Conda environments
+alias cel='conda env list'
+alias sac='source activate'
+alias sda='source deactivate'
+
 # Julia
 alias julia="exec
 '/Applications/Julia-0.3.2.app/Contents/Resources/julia/bin/julia'"

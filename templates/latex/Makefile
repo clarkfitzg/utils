@@ -2,7 +2,7 @@
 TEXFILE = report
 
 # Figures to be included in report
-FIGURES = normal.pdf
+FIGURES = normal_hist.pdf
 
 # Report depends on this data
 DATAFILE = normal.csv
@@ -16,8 +16,11 @@ $(TEXFILE).pdf : $(TEXFILE).tex $(FIGURES)
 	pdflatex $<
 	pdflatex $<
 
-$(FIGURES) : normal.R
-	R CMD BATCH --vanilla $<
+$(DATAFILE) : normal.py
+	python $<
+
+$(FIGURES) $(TABLES) : analysis.py
+	python $<
 
 view :
 	open $(TEXFILE).pdf
@@ -27,3 +30,6 @@ clean :
 	rm *.log
 	rm *.out
 	rm *.Rout
+
+#$(FIGURES) : normal.R
+#R CMD BATCH --vanilla $<

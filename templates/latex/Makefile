@@ -1,8 +1,14 @@
 # Name of the report
-TEXFILE = homework
+TEXFILE = report
 
-# variable containing figures to be included in report
+# Figures to be included in report
 FIGURES = normal.pdf
+
+# Report depends on this data
+DATAFILE = normal.csv
+
+# Summary tables
+TABLES = 
 
 # Run pdflatex twice so that the figure references are correct.
 # $< references the first prerequisite

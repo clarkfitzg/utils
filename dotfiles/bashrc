@@ -19,7 +19,7 @@ LS_COLORS=$LS_COLORS:'di=0;36:' ; export LS_COLORS
 #export PATH="$HOME/anaconda/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin"
 
 # Python 3
-export PATH="$HOME/anaconda3/bin:$HOME/utils/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin"
+export PATH="$HOME/anaconda3/bin:$HOME/utils/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin:$PATH"
 
 # Add personal utilities to Python path
 export PYTHONPATH="$HOME/utils/python"
@@ -39,6 +39,9 @@ export EDITOR="vim"
 ############################################################
 # Aliased commands
 ############################################################
+
+# For building docs in xray
+alias makedocs='python ../setup.py install && make html'
 
 # Show ls colors - Needed for Ubuntu
 #alias ls='ls --color=auto'

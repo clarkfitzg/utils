@@ -1,4 +1,4 @@
 options(repos=structure(c(CRAN="http://cran.rstudio.com/")))
 
 # Go into debugger
-options(error=utils::recover)
+# options(error=utils::recover)

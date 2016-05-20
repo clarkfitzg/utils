@@ -17,7 +17,7 @@ set shiftwidth=4
 
 " Tim Pope's Package installer
 
-execute pathogen#infect()
+"execute pathogen#infect()
 "call pathogen#helptags()
 
 filetype plugin indent on

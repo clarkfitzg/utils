@@ -16,8 +16,8 @@ set shiftwidth=4
 "filetype off
 
 " Tim Pope's Package installer
-
-"execute pathogen#infect()
+" Used for Slime / tmux
+execute pathogen#infect()
 "call pathogen#helptags()
 
 filetype plugin indent on

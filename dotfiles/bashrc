@@ -31,9 +31,18 @@ export EDITOR="vim"
 # Current favorite conda environment
 # source activate py35
 
+# Spark and Hadoop stuff
+#export SPARK_HOME="$HOME/dev/spark-2.0.0-preview"
+# From sparklyr::spark_install
+export SPARK_HOME="/Users/clark/Library/Caches/spark/spark-2.0.0-preview-bin-hadoop2.6/"
+#export HIVE_HOME=/usr/local/Cellar/hive/1.2.1/libexec
+#export JAVA_HOME=$(/usr/libexec/java_home)
+
 ############################################################
 # Aliased commands
 ############################################################
+
+alias m='make'
 
 # For building docs in xray
 alias makedocs='python ../setup.py install && make html'

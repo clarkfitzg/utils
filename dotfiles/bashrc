@@ -39,9 +39,9 @@ export EDITOR="vim"
 # source activate py35
 
 # Spark and Hadoop stuff
-#export SPARK_HOME="$HOME/dev/spark-2.0.0-preview"
+export SPARK_HOME="$HOME/dev/spark"
 # From sparklyr::spark_install
-export SPARK_HOME="/Users/clark/Library/Caches/spark/spark-2.0.0-preview-bin-hadoop2.6/"
+#export SPARK_HOME="/Users/clark/Library/Caches/spark/spark-2.0.0-preview-bin-hadoop2.6/"
 #export HIVE_HOME=/usr/local/Cellar/hive/1.2.1/libexec
 #export JAVA_HOME=$(/usr/libexec/java_home)
 alias spark=$SPARK_HOME"bin/spark-shell"

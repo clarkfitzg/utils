@@ -40,6 +40,8 @@ export EDITOR="vim"
 
 # Spark and Hadoop stuff
 export SPARK_HOME="$HOME/dev/spark"
+export SPARK_MASTER_IP=127.0.0.1
+export SPARK_LOCAL_IP=127.0.0.1
 # From sparklyr::spark_install
 #export SPARK_HOME="/Users/clark/Library/Caches/spark/spark-2.0.0-preview-bin-hadoop2.6/"
 #export HIVE_HOME=/usr/local/Cellar/hive/1.2.1/libexec
@@ -86,3 +88,5 @@ alias ipy="ipython -i ~/.ipython_startup.py"
 
 # Run nosetests with doctests
 alias nt="nosetests --with-doctest"
+
+alias R="R --no-save"

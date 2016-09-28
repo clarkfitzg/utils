@@ -55,25 +55,26 @@ alias spark=$SPARK_HOME"bin/spark-shell"
 # Aliased commands
 ############################################################
 
-alias m='make'
+alias op='xdg-open'
+#alias m='make'
 
 # For building docs in xray
-alias makedocs='python ../setup.py install && make html'
+#alias makedocs='python ../setup.py install && make html'
 
 # Show ls colors - Needed for Ubuntu
 #alias ls='ls --color=auto'
 
 # Conda environments
-alias cel='conda env list'
-alias sac='source activate'
-alias sda='source deactivate'
+#alias cel='conda env list'
+#alias sac='source activate'
+#alias sda='source deactivate'
 
 # Julia
-alias julia="exec
-'/Applications/Julia-0.3.2.app/Contents/Resources/julia/bin/julia'"
+#alias julia="exec
+#'/Applications/Julia-0.3.2.app/Contents/Resources/julia/bin/julia'"
 
 # Git 
-alias gst='git status'
+#alias gst='git status'
 
 # Tmux
 alias tml='tmux list-sessions'
@@ -84,12 +85,12 @@ alias tma='tmux attach -t'
 #alias vi='mvim -v'
 
 # Enables conda install commands
-alias py3k='source activate py3k'
+#alias py3k='source activate py3k'
 
 # Start ipython with startup file
 alias ipy="ipython -i ~/.ipython_startup.py"
 
 # Run nosetests with doctests
-alias nt="nosetests --with-doctest"
+#alias nt="nosetests --with-doctest"
 
 alias R="R --no-save"

@@ -6,9 +6,9 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # Trying to get the files in color.
-export CLICOLOR=1
+#export CLICOLOR=1
 # Doesn't work on Ubuntu:
-export LSCOLORS=ExFxBxDxCxegedabagacad
+#export LSCOLORS=ExFxBxDxCxegedabagacad
 # For Ubuntu:
 #LS_COLORS=$LS_COLORS:'di=0;36:' ; export LS_COLORS
 
@@ -51,6 +51,10 @@ export SPARK_LOCAL_IP=127.0.0.1
 #export JAVA_HOME=$(/usr/libexec/java_home)
 alias spark=$SPARK_HOME"bin/spark-shell"
 
+# Attempting to install Duncan's Rcodegen packages, seems to require older
+# clang
+#alias clang='clang-3.7'
+
 ############################################################
 # Aliased commands
 ############################################################
@@ -62,7 +66,7 @@ alias op='xdg-open'
 #alias makedocs='python ../setup.py install && make html'
 
 # Show ls colors - Needed for Ubuntu
-#alias ls='ls --color=auto'
+alias ls='ls --color=auto'
 
 # Conda environments
 #alias cel='conda env list'

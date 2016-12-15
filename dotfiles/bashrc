@@ -74,8 +74,7 @@ alias ls='ls --color=auto'
 #alias sda='source deactivate'
 
 # Julia
-#alias julia="exec
-#'/Applications/Julia-0.3.2.app/Contents/Resources/julia/bin/julia'"
+#alias julia='/home/clark/dev/julia/julia'
 
 # Git 
 #alias gst='git status'

@@ -8,3 +8,5 @@
 [user]
 	name = Clark Fitzgerald
 	email = clarkfitzg@gmail.com
+[core]
+	excludesfile = /home/clark/.gitignore_global

@@ -6,7 +6,7 @@ if [ -f /etc/bashrc ]; then
 fi
 
 if [ "$OSTYPE" == "darwin16" ]; then
-    echo "Hi Clark, it's Mac."
+    printf "Hi Clark, it's Mac.\n\n"
     #export CLICOLOR=1
     # Doesn't work on Ubuntu:
     #export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
@@ -16,7 +16,7 @@ if [ "$OSTYPE" == "darwin16" ]; then
 fi
 
 if [ "$OSTYPE" == "linux-gnu" ]; then
-    echo "Hi Clark, it's Linux."
+    printf "Hi Clark, it's Linux.\n\n"
     # Show ls colors - Needed for Ubuntu
     alias ls='ls --color=auto'
     alias op='xdg-open'

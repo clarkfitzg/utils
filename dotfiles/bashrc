@@ -15,12 +15,12 @@ if [ "$OSTYPE" == "darwin16" ]; then
     #alias ls='ls -Gp'
 fi
 
-# For Ubuntu:
-#LS_COLORS=$LS_COLORS:'di=0;36:' ; export LS_COLORS
-
-# Prompt is 
-# \h hostname \w working directory $
-#PS1='\h \w \$ '
+if [ "$OSTYPE" == "linux-gnu" ]; then
+    echo "Hi Clark, it's Linux."
+    # Show ls colors - Needed for Ubuntu
+    alias ls='ls --color=auto'
+    alias op='xdg-open'
+fi
 
 # Terminal with Git branch
 # https://coderwall.com/p/fasnya/add-git-branch-name-to-bash-prompt
@@ -30,7 +30,6 @@ parse_git_branch() {
 export PS1="\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\]\n$ "
 
 export EDITOR="vim"
-
 
 # Python 2
 #export PATH="$HOME/anaconda/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin"
@@ -52,33 +51,29 @@ export EDITOR="vim"
 
 # Spark and Hadoop stuff
 #export SPARK_HOME="$HOME/dev/spark"
-export SPARK_HOME="/Users/clark/Library/Caches/spark/spark-2.0.0-preview-bin-hadoop2.6/"
-export SPARK_MASTER_IP=127.0.0.1
-export SPARK_LOCAL_IP=127.0.0.1
+#export SPARK_HOME="/Users/clark/Library/Caches/spark/spark-2.0.0-preview-bin-hadoop2.6/"
+#export SPARK_MASTER_IP=127.0.0.1
+#export SPARK_LOCAL_IP=127.0.0.1
 # From sparklyr::spark_install
 #export HIVE_HOME=/usr/local/Cellar/hive/1.2.1/libexec
 #export JAVA_HOME=$(/usr/libexec/java_home)
-alias spark=$SPARK_HOME"bin/spark-shell"
+#alias spark=$SPARK_HOME"bin/spark-shell"
 
 # Attempting to install Duncan's Rcodegen packages, seems to require older
 # clang
 #alias clang='clang-3.7'
 
 # Arrow requirements
-export PKG_CONFIG_PATH=/Users/clark/dev/arrow/cpp/release/src/arrow/:$PKG_CONFIG_PATH
+#export PKG_CONFIG_PATH=/Users/clark/dev/arrow/cpp/release/src/arrow/:$PKG_CONFIG_PATH
 
 ############################################################
 # Aliased commands
 ############################################################
 
-alias op='xdg-open'
 #alias m='make'
 
 # For building docs in xray
 #alias makedocs='python ../setup.py install && make html'
-
-# Show ls colors - Needed for Ubuntu
-#alias ls='ls --color=auto'
 
 # Conda environments
 #alias cel='conda env list'
@@ -111,4 +106,3 @@ alias ipy="ipython -i ~/.ipython_startup.py"
 #alias nt="nosetests --with-doctest"
 
 alias R="R --no-save"
-

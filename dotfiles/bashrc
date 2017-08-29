@@ -5,10 +5,16 @@ if [ -f /etc/bashrc ]; then
         . /etc/bashrc
 fi
 
-# Trying to get the files in color.
-#export CLICOLOR=1
-# Doesn't work on Ubuntu:
-#export LSCOLORS=ExFxBxDxCxegedabagacad
+if [ "$OSTYPE" == "darwin16" ]; then
+    echo "Hi Clark, it's Mac."
+    #export CLICOLOR=1
+    # Doesn't work on Ubuntu:
+    #export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+    export LSCOLORS="EHfxcxdxBxegecabagacad" 
+    alias ls='ls -GH'
+    #alias ls='ls -Gp'
+fi
+
 # For Ubuntu:
 #LS_COLORS=$LS_COLORS:'di=0;36:' ; export LS_COLORS
 
@@ -33,8 +39,10 @@ export EDITOR="vim"
 #export PATH="$HOME/anaconda3/bin:$HOME/utils/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin:$PATH"
 
 # Python 3 Anaconda
-export PATH=/home/clark/anaconda3/bin:$PATH
 #export PATH=$HOME/bin:$PATH
+#export PATH=/home/clark/anaconda3/bin:$PATH
+# Also clang / llvm tool chain
+#export PATH=$HOME/bin:/usr/local/opt/llvm/bin:$PATH
 
 # Add personal utilities to Python path
 #export PYTHONPATH="$HOME/utils/python"
@@ -43,11 +51,11 @@ export PATH=/home/clark/anaconda3/bin:$PATH
 # source activate py35
 
 # Spark and Hadoop stuff
-export SPARK_HOME="$HOME/dev/spark"
+#export SPARK_HOME="$HOME/dev/spark"
+export SPARK_HOME="/Users/clark/Library/Caches/spark/spark-2.0.0-preview-bin-hadoop2.6/"
 export SPARK_MASTER_IP=127.0.0.1
 export SPARK_LOCAL_IP=127.0.0.1
 # From sparklyr::spark_install
-#export SPARK_HOME="/Users/clark/Library/Caches/spark/spark-2.0.0-preview-bin-hadoop2.6/"
 #export HIVE_HOME=/usr/local/Cellar/hive/1.2.1/libexec
 #export JAVA_HOME=$(/usr/libexec/java_home)
 alias spark=$SPARK_HOME"bin/spark-shell"
@@ -55,6 +63,9 @@ alias spark=$SPARK_HOME"bin/spark-shell"
 # Attempting to install Duncan's Rcodegen packages, seems to require older
 # clang
 #alias clang='clang-3.7'
+
+# Arrow requirements
+export PKG_CONFIG_PATH=/Users/clark/dev/arrow/cpp/release/src/arrow/:$PKG_CONFIG_PATH
 
 ############################################################
 # Aliased commands
@@ -67,7 +78,7 @@ alias op='xdg-open'
 #alias makedocs='python ../setup.py install && make html'
 
 # Show ls colors - Needed for Ubuntu
-alias ls='ls --color=auto'
+#alias ls='ls --color=auto'
 
 # Conda environments
 #alias cel='conda env list'
@@ -76,6 +87,8 @@ alias ls='ls --color=auto'
 
 # Julia
 #alias julia='/home/clark/dev/julia/julia'
+#alias julia="exec
+#'/Applications/Julia-0.3.2.app/Contents/Resources/julia/bin/julia'"
 
 # Git 
 #alias gst='git status'
@@ -98,3 +111,4 @@ alias ipy="ipython -i ~/.ipython_startup.py"
 #alias nt="nosetests --with-doctest"
 
 alias R="R --no-save"
+

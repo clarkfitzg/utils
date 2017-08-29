@@ -1,0 +1,7 @@
+# Object files from compilation
+*.so
+*.o
+*.dSYM
+
+# Text editor files
+*.swp

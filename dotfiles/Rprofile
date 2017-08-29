@@ -1,4 +1,12 @@
 options(repos=structure(c(CRAN="https://cran.rstudio.com/")))
 
+partools_time = function()
+{
+    library(partools)
+    cls <<- makeCluster(2)
+    setclsinfo(cls)
+}
+
+
 # Go into debugger
 # options(error=utils::recover)

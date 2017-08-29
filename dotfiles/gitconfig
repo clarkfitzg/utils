@@ -9,4 +9,4 @@
 	name = Clark Fitzgerald
 	email = clarkfitzg@gmail.com
 [core]
-	excludesfile = /Users/clark/.gitignore_global
+	excludesfile = /home/clark/.gitignore

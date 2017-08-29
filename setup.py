@@ -2,6 +2,8 @@
 '''
 Script must be run from within directory where it's located
 so that working directory is correct.
+
+TODO: git config --global core.excludesfile ~/.gitignore
 '''
 
 import os

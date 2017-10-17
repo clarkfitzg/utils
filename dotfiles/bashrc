@@ -5,7 +5,7 @@ if [ -f /etc/bashrc ]; then
         . /etc/bashrc
 fi
 
-if [ "$OSTYPE" == "darwin16" ]; then
+if [ "$(uname)" == "Darwin" ]; then
     printf "Hi Clark, it's Mac.\n\n"
     #export CLICOLOR=1
     # Doesn't work on Ubuntu:

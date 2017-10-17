@@ -58,6 +58,7 @@ export EDITOR="vim"
 #export HIVE_HOME=/usr/local/Cellar/hive/1.2.1/libexec
 #export JAVA_HOME=$(/usr/libexec/java_home)
 #alias spark=$SPARK_HOME"bin/spark-shell"
+export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")
 
 # Attempting to install Duncan's Rcodegen packages, seems to require older
 # clang

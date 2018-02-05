@@ -106,7 +106,7 @@ alias tma='tmux attach -t'
 #alias py3k='source activate py3k'
 
 # Start ipython with startup file
-alias ipy="ipython -i ~/.ipython_startup.py"
+alias ipy="ipython3 -i ~/.ipython_startup.py"
 
 # Run nosetests with doctests
 #alias nt="nosetests --with-doctest"

@@ -1,17 +1,15 @@
-options(repos=structure(c(CRAN="https://cran.rstudio.com/")))
+options(repos=structure(c(CRAN="https://cran.rstudio.com/"))
+    , check.bounds = TRUE
+    , error = utils::recover
+    , max.print = 50
+    , scipen = -1
+    , warnPartialMatchArgs = TRUE
+    , warnPartialMatchAttr = TRUE
+    , warnPartialMatchDollar = TRUE
+)
 
 partools_time = function()
 {
-    library(partools)
-    cls <<- makeCluster(2)
-    setclsinfo(cls)
-}
-
-
-# Go into debugger
-# options(error=utils::recover)
-
-partools_time = function(){
     library(partools)
     cls <<- makeCluster(2)
     setclsinfo(cls)

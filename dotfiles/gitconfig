@@ -9,6 +9,5 @@
 	name = Clark Fitzgerald
 	email = clarkfitzg@gmail.com
 [core]
-	excludesfile = /Users/clark/.gitignore
-[credential]
+	excludesfile = ~/.gitignore
 	helper = osxkeychain

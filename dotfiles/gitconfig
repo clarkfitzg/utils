@@ -10,3 +10,5 @@
 	email = clarkfitzg@gmail.com
 [core]
 	excludesfile = /Users/clark/.gitignore
+[credential]
+	helper = osxkeychain

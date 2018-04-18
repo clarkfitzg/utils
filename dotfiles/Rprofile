@@ -1,11 +1,11 @@
 options(repos=structure(c(CRAN="https://cran.rstudio.com/"))
-    , check.bounds = TRUE
+    #, check.bounds = TRUE
     , error = utils::recover
     , max.print = 50
     , scipen = -1
-    , warnPartialMatchArgs = TRUE
-    , warnPartialMatchAttr = TRUE
-    , warnPartialMatchDollar = TRUE
+    #, warnPartialMatchArgs = TRUE
+    #, warnPartialMatchAttr = TRUE
+    #, warnPartialMatchDollar = TRUE
 )
 
 partools_time = function()

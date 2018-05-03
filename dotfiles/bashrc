@@ -108,7 +108,3 @@ alias tma='tmux attach -t'
 # Start ipython with startup file
 alias ipy="ipython -i ~/.ipython_startup.py"
 
-# Run nosetests with doctests
-#alias nt="nosetests --with-doctest"
-
-alias R="R --no-save"

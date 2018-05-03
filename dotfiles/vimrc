@@ -6,6 +6,9 @@
 set number              " Display line numbers
 "set gfn=Menlo:h14
 
+" Single spaces after sentences
+set nojoinspaces
+
 " Tab settings
 set tabstop=4
 set expandtab

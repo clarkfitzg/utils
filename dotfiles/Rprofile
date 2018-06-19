@@ -7,3 +7,7 @@ options(repos=structure(c(CRAN="https://cran.rstudio.com/"))
     #, warnPartialMatchAttr = TRUE
     #, warnPartialMatchDollar = TRUE
 )
+
+# Writes .Rhistory file to local directory when R exits
+.Last <- function()
+    if(interactive()) try(savehistory())

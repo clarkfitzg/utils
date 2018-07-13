@@ -25,6 +25,10 @@ fi
 # DSI machine
 if [ "$(hostname)" == "DSI-CF" ]; then
     export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")
+
+    # Necessary for rJava?
+    #export LD_LIBRARY_PATH=
+
     export PATH="$PATH:/usr/local/hadoop/bin"
 fi
 
@@ -36,6 +40,9 @@ parse_git_branch() {
 export PS1="\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\]\n$ "
 
 export EDITOR="vim"
+
+# Don't run checks that require network access when checking R packages.
+export _R_CHECK_CRAN_INCOMING_REMOTE_=FALSE
 
 # Python 2
 #export PATH="$HOME/anaconda/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin"

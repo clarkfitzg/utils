@@ -26,9 +26,6 @@ execute pathogen#infect()
 filetype plugin indent on
 syntax on
 
-" Keep it under 80 characters wide
-" set textwidth=79
-
 " From Practical Vim book
 set history=200     " Change from 20 commands to 200 in history.
 
@@ -41,8 +38,7 @@ set foldnestmax=2
 " Highlight trailing whitespace
 "match Todo /\s\+$/
 
-" Text width
-set tw=75
+set textwidth=75
 
 " Vim slime
 let g:slime_target = "tmux"
@@ -51,6 +47,26 @@ let g:slime_python_ipython = 1
 
 " C syntax for OpenCL kernels
 au BufNewFile,BufRead *.cl set filetype=c
+
+" Soft wrap settings
+set wrap
+set linebreak
+set nolist
+
+" gq formats to One sentence per line in LaTeX 
+""""""""""""""""""""""""""""""""""""""""
+" https://vi.stackexchange.com/questions/2846/how-to-set-up-vim-to-work-with-one-sentence-per-line
+
+function! SentenceNewlineFormat(start, end)
+    silent execute a:start.','.a:end.'s/\n/ /g'
+    silent execute a:start.','.a:end.'s/[.!?]\zs /\r/g'
+endfunction
+
+let g:tex_flavor = "latex"
+autocmd Filetype tex
+    \ setlocal formatexpr=SentenceNewlineFormat(v:lnum,v:lnum+v:count-1) |
+    \ setlocal textwidth=5000
+"    \ setlocal formatoptions-=t |
 
 """"""""""""""""""""""""""""""""""""""""
 """ Macros

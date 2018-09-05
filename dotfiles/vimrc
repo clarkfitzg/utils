@@ -57,7 +57,10 @@ set nolist
 """"""""""""""""""""""""""""""""""""""""
 " https://vi.stackexchange.com/questions/2846/how-to-set-up-vim-to-work-with-one-sentence-per-line
 
+" TODO Why did it wrap around from the end to the beginning when I got around 80 characters?
 function! SentenceNewlineFormat(start, end)
+    " Only one consecutive space allowed
+    silent execute a:start.','.a:end.'s/\v\s+/ /g'
     " Remove single newlines
     silent execute a:start.','.a:end.'s/\v(\S)\s*\n\s*(\S)/\1 \2/g'
     "silent execute a:start.','.a:end.'s/\n/ /g'
@@ -71,7 +74,8 @@ endfunction
 let g:tex_flavor = "latex"
 autocmd Filetype tex
     \ setlocal formatexpr=SentenceNewlineFormat(v:lnum,v:lnum+v:count-1) |
-    \ setlocal textwidth=5000
+    \ setlocal textwidth=0
+    "\ setlocal textwidth=500
 "    \ setlocal formatoptions-=t |
 
 """"""""""""""""""""""""""""""""""""""""

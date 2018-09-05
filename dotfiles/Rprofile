@@ -3,9 +3,9 @@ options(repos=structure(c(CRAN="https://cran.rstudio.com/"))
     , error = utils::recover
     , max.print = 500
     , scipen = -1
-    #, warnPartialMatchArgs = TRUE
-    #, warnPartialMatchAttr = TRUE
-    #, warnPartialMatchDollar = TRUE
+    , warnPartialMatchArgs = TRUE
+    , warnPartialMatchAttr = TRUE
+    , warnPartialMatchDollar = TRUE
 )
 
 # Writes .Rhistory file to local directory when R exits

@@ -27,7 +27,7 @@ if [ "$(hostname)" == "DSI-CF" ]; then
     export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")
 
     # Necessary for rJava?
-    #export LD_LIBRARY_PATH=
+    export LD_LIBRARY_PATH="/usr/lib/jvm/default-java/jre/lib/amd64/server"
 
     export PATH="$PATH:/usr/local/hadoop/bin"
 fi

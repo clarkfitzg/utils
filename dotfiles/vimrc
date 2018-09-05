@@ -58,13 +58,14 @@ set nolist
 " https://vi.stackexchange.com/questions/2846/how-to-set-up-vim-to-work-with-one-sentence-per-line
 
 function! SentenceNewlineFormat(start, end)
-    " Remove newlines
-    silent execute a:start.','.a:end.'s/\_s+/ /g'
+    " Remove single newlines
+    silent execute a:start.','.a:end.'s/\v(\S)\s*\n\s*(\S)/\1 \2/g'
     "silent execute a:start.','.a:end.'s/\n/ /g'
     " Notes of the form \nt{do this} go on their own lines
     "silent execute a:start.','.a:end.'s/\(\\nt\{.*\}\)//g'
     " Wrap sentences
-    silent execute a:start.','.a:end.'s/[.!?]\zs /\r/g'
+    silent execute a:start.','.a:end.'s/\(i\.e\|e\.g\|\<al\)\@<![.!?]\zs /\r/g'
+    "silent execute a:start.','.a:end.'s/[.!?]\zs /\r/g'
 endfunction
 
 let g:tex_flavor = "latex"

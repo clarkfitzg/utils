@@ -72,7 +72,7 @@ function! SentenceNewlineFormat(start, end)
 endfunction
 
 let g:tex_flavor = "latex"
-autocmd Filetype tex
+autocmd Filetype tex,markdown,rmd
     \ setlocal formatexpr=SentenceNewlineFormat(v:lnum,v:lnum+v:count-1) |
     \ setlocal textwidth=0
     "\ setlocal textwidth=500

@@ -57,7 +57,6 @@ set nolist
 """"""""""""""""""""""""""""""""""""""""
 " https://vi.stackexchange.com/questions/2846/how-to-set-up-vim-to-work-with-one-sentence-per-line
 
-" TODO Why did it wrap around from the end to the beginning when I got around 80 characters?
 function! SentenceNewlineFormat(start, end)
     " Only one consecutive space allowed
     silent execute a:start.','.a:end.'s/\v\s+/ /g'
@@ -68,6 +67,7 @@ function! SentenceNewlineFormat(start, end)
     "silent execute a:start.','.a:end.'s/\(\\nt\{.*\}\)//g'
     " Wrap sentences
     silent execute a:start.','.a:end.'s/\(i\.e\|e\.g\|\<al\)\@<![.!?]\zs /\r/g'
+    " TODO: Not single newlines
     "silent execute a:start.','.a:end.'s/[.!?]\zs /\r/g'
 endfunction
 

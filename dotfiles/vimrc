@@ -23,6 +23,7 @@ set shiftwidth=4
 execute pathogen#infect()
 "call pathogen#helptags()
 
+filetype on
 filetype plugin indent on
 syntax on
 
@@ -45,13 +46,20 @@ let g:slime_target = "tmux"
 let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
 let g:slime_python_ipython = 1
 
-" C syntax for OpenCL kernels
-au BufNewFile,BufRead *.cl set filetype=c
-
 " Soft wrap settings
 set wrap
 set linebreak
 set nolist
+
+
+" File type specific 
+""""""""""""""""""""""""""""""""""""""""
+" C syntax for OpenCL kernels
+au BufNewFile,BufRead *.cl set filetype=c
+
+" Don't hard wrap lines
+au BufNewFile,BufRead *.txt setfiletype text
+
 
 " gq formats to One sentence per line in LaTeX 
 """"""""""""""""""""""""""""""""""""""""
@@ -72,7 +80,7 @@ function! SentenceNewlineFormat(start, end)
 endfunction
 
 let g:tex_flavor = "latex"
-autocmd Filetype tex,markdown,rmd
+autocmd Filetype tex,markdown,rmd,text
     \ setlocal formatexpr=SentenceNewlineFormat(v:lnum,v:lnum+v:count-1) |
     \ setlocal textwidth=0
     "\ setlocal textwidth=500

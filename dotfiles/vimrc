@@ -58,7 +58,7 @@ set nolist
 au BufNewFile,BufRead *.cl set filetype=c
 
 " Don't hard wrap lines
-au BufNewFile,BufRead *.txt setfiletype text
+au BufNewFile,BufRead *.txt,*.csv setfiletype text
 
 
 " gq formats to One sentence per line in LaTeX 

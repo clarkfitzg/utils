@@ -1,6 +1,11 @@
 #!/bin/bash
 
-# Pathogen
+# Set up regular development environment
+
+# SSH from my known clients
+cat authorized_keys > ~/.ssh/authorized_keys
+
+# Pathogen, Vim package manager
 mkdir -p ~/.vim/autoload ~/.vim/bundle && \
     curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 

@@ -23,11 +23,9 @@ set shiftwidth=4
 execute pathogen#infect()
 "call pathogen#helptags()
 
+filetype on
 filetype plugin indent on
 syntax on
-
-" Keep it under 80 characters wide
-" set textwidth=79
 
 " From Practical Vim book
 set history=200     " Change from 20 commands to 200 in history.
@@ -41,16 +39,52 @@ set foldnestmax=2
 " Highlight trailing whitespace
 "match Todo /\s\+$/
 
-" Text width
-set tw=75
+set textwidth=75
 
 " Vim slime
 let g:slime_target = "tmux"
 let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
 let g:slime_python_ipython = 1
 
+" Soft wrap settings
+set wrap
+set linebreak
+set nolist
+
+
+" File type specific 
+""""""""""""""""""""""""""""""""""""""""
 " C syntax for OpenCL kernels
 au BufNewFile,BufRead *.cl set filetype=c
+
+" Don't hard wrap lines
+au BufNewFile,BufRead *.txt,*.csv setfiletype text
+
+
+" gq formats to One sentence per line in LaTeX 
+""""""""""""""""""""""""""""""""""""""""
+" https://vi.stackexchange.com/questions/2846/how-to-set-up-vim-to-work-with-one-sentence-per-line
+
+function! SentenceNewlineFormat(start, end)
+    " Only one consecutive space allowed
+    silent execute a:start.','.a:end.'s/\v\s+/ /g'
+    " Remove single newlines
+    silent execute a:start.','.a:end.'s/\v(\S)\s*\n\s*(\S)/\1 \2/g'
+    "silent execute a:start.','.a:end.'s/\n/ /g'
+    " Notes of the form \nt{do this} go on their own lines
+    "silent execute a:start.','.a:end.'s/\(\\nt\{.*\}\)//g'
+    " Wrap sentences
+    silent execute a:start.','.a:end.'s/\(i\.e\|e\.g\|\<al\)\@<![.!?]\zs /\r/g'
+    " TODO: Not single newlines
+    "silent execute a:start.','.a:end.'s/[.!?]\zs /\r/g'
+endfunction
+
+let g:tex_flavor = "latex"
+autocmd Filetype tex,markdown,rmd,text
+    \ setlocal formatexpr=SentenceNewlineFormat(v:lnum,v:lnum+v:count-1) |
+    \ setlocal textwidth=0
+    "\ setlocal textwidth=500
+"    \ setlocal formatoptions-=t |
 
 """"""""""""""""""""""""""""""""""""""""
 """ Macros

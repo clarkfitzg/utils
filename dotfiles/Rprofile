@@ -3,7 +3,29 @@ options(repos=structure(c(CRAN="https://cran.rstudio.com/"))
     , error = utils::recover
     , max.print = 500
     , scipen = -1
-    #, warnPartialMatchArgs = TRUE
-    #, warnPartialMatchAttr = TRUE
-    #, warnPartialMatchDollar = TRUE
+    , warnPartialMatchArgs = TRUE
+    , warnPartialMatchAttr = TRUE
+    , warnPartialMatchDollar = TRUE
 )
+
+# Writes .Rhistory file to local directory when R exits
+.Last <- function()
+    if(interactive()) try(savehistory())
+
+
+pkg_args = function(pkg, exclude = c("file", "file<-", "plot"))
+{
+    library(pkg, character.only = TRUE)
+    exported = ls(paste0("package:", pkg))
+
+    exported = exported[!(exported %in% exclude)]
+
+    funcs = lapply(exported, function(x) getExportedValue(pkg, x))
+    names(funcs) = exported
+    funcs = funcs[sapply(funcs, is.function)]
+
+    out = lapply(funcs, formals)
+    out = sapply(out, names)
+    
+    list(unique = sort(unique(unlist(out))), all = out)
+}

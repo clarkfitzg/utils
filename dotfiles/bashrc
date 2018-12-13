@@ -5,31 +5,22 @@ if [ -f /etc/bashrc ]; then
         . /etc/bashrc
 fi
 
-if [ "$(uname)" == "Darwin" ]; then
-    printf "Hi Clark, it's Mac.\n\n"
-    #export CLICOLOR=1
-    # Doesn't work on Ubuntu:
-    #export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
-    export LSCOLORS="EHfxcxdxBxegecabagacad" 
-    alias ls='ls -GH'
-    #alias ls='ls -Gp'
-fi
-
-if [ "$OSTYPE" == "linux-gnu" ]; then
-    printf "Hi Clark, it's Linux.\n\n"
-    # Show ls colors - Needed for Ubuntu
-    alias ls='ls --color=auto'
-    alias op='xdg-open'
-fi
-
-# DSI machine
-if [ "$(hostname)" == "DSI-CF" ]; then
-    export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")
-
-    # Necessary for rJava?
-    export LD_LIBRARY_PATH="/usr/lib/jvm/default-java/jre/lib/amd64/server"
-
-    export PATH="$PATH:/usr/local/hadoop/bin"
+if [[ $- == *i* ]]; then
+    if [ "$(uname)" == "Darwin" ]; then
+        printf "Hi Clark, it's Mac.\n\n"
+        #export CLICOLOR=1
+        # Doesn't work on Ubuntu:
+        #export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+        export LSCOLORS="EHfxcxdxBxegecabagacad" 
+        alias ls='ls -GH'
+        #alias ls='ls -Gp'
+    fi
+    if [ "$OSTYPE" == "linux-gnu" ]; then
+        printf "Hi Clark, it's Linux.\n\n"
+        # Show ls colors - Needed for Ubuntu
+        alias ls='ls --color=auto'
+        alias op='xdg-open'
+    fi
 fi
 
 # Terminal with Git branch
@@ -38,11 +29,6 @@ parse_git_branch() {
          git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 export PS1="\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\]\n$ "
-
-export EDITOR="vim"
-
-# Don't run checks that require network access when checking R packages.
-export _R_CHECK_CRAN_INCOMING_REMOTE_=FALSE
 
 # Python 2
 #export PATH="$HOME/anaconda/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin"
@@ -83,6 +69,18 @@ export _R_CHECK_CRAN_INCOMING_REMOTE_=FALSE
 # Aliased commands
 ############################################################
 
+# Tmux
+alias tml='tmux list-sessions'
+alias tma='tmux attach -t'
+
+# Start ipython with startup file
+alias ipy="ipython3 -i ~/.ipython_startup.py"
+
+alias R="R --no-save"
+
+# Run nosetests with doctests
+#alias nt="nosetests --with-doctest"
+
 #alias m='make'
 
 # For building docs in xray
@@ -101,21 +99,9 @@ export _R_CHECK_CRAN_INCOMING_REMOTE_=FALSE
 # Git 
 #alias gst='git status'
 
-# Tmux
-alias tml='tmux list-sessions'
-alias tma='tmux attach -t'
-
 # Run current version of Macvim
 #alias mvim='mvim -v'
 #alias vi='mvim -v'
 
 # Enables conda install commands
 #alias py3k='source activate py3k'
-
-# Start ipython with startup file
-alias ipy="ipython3 -i ~/.ipython_startup.py"
-
-# Run nosetests with doctests
-#alias nt="nosetests --with-doctest"
-
-alias R="R --no-save"

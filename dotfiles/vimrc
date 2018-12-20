@@ -39,7 +39,7 @@ set foldnestmax=2
 " Highlight trailing whitespace
 "match Todo /\s\+$/
 
-set textwidth=75
+"set textwidth=75
 
 " Vim slime
 let g:slime_target = "tmux"

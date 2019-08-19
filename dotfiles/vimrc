@@ -15,6 +15,11 @@ set expandtab
 set softtabstop=4
 set shiftwidth=4
 
+" Case insensitive searches
+" https://stackoverflow.com/questions/2287440/how-to-do-case-insensitive-search-in-vim
+set ignorecase
+set smartcase
+
 " To use Python mode
 "filetype off
 

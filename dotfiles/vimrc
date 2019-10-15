@@ -29,7 +29,7 @@ execute pathogen#infect()
 "call pathogen#helptags()
 
 filetype on
-filetype plugin indent on
+filetype plugin indent off
 syntax on
 
 " From Practical Vim book

@@ -1,11 +1,14 @@
 # oh-my-zsh stuff
 export ZSH="/Users/clark/.oh-my-zsh"
-ZSH_THEME="minimal"
+#ZSH_THEME="minimal"
 plugins=(
     git
     vi-mode
 )
 source $ZSH/oh-my-zsh.sh
+
+# Directory relative to home.
+PROMPT='%~ $ '
 
 emulate sh -c '. ~/.profile'
 emulate sh -c '. ~/.bashrc'

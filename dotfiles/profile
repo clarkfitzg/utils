@@ -1,17 +1,18 @@
-# bash_profile
+# .profile
 # Clark Fitzgerald
-
-# DSI machine
-if [ "$(hostname)" == "DSI-CF" ]; then
-    export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")
-
-    # Necessary for rJava?
-    export LD_LIBRARY_PATH="/usr/lib/jvm/default-java/jre/lib/amd64/server"
-
-    export PATH="$PATH:/usr/local/hadoop/bin"
-fi
 
 export EDITOR="vim"
 
 # Don't run checks that require network access when checking R packages.
 export _R_CHECK_CRAN_INCOMING_REMOTE_=FALSE
+
+
+# DSI machine
+#if [ "$(hostname)" == "DSI-CF" ]; then
+#    export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")
+#
+#    # Necessary for rJava?
+#    export LD_LIBRARY_PATH="/usr/lib/jvm/default-java/jre/lib/amd64/server"
+#
+#    export PATH="$PATH:/usr/local/hadoop/bin"
+#fi

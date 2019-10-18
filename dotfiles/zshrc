@@ -1,15 +1,13 @@
-emulate sh -c '. ~/.bash_profile'
+# Path to your oh-my-zsh installation.
+export ZSH="/Users/clark/.oh-my-zsh"
 
+ZSH_THEME="minimal"
 
-# https://www.themoderncoder.com/add-git-branch-information-to-your-zsh-prompt/
-# Load version control information
-autoload -Uz vcs_info
-precmd() { vcs_info }
+plugins=(
+    git
+    vi-mode
+)
 
-# Format the vcs_info_msg_0_ variable
-zstyle ':vcs_info:git:*' formats 'on branch %b'
- 
-# Set up the prompt (with git branch name)
-setopt PROMPT_SUBST
-PROMPT='%n in ${PWD/#$HOME/~} ${vcs_info_msg_0_}
-%% '
+source $ZSH/oh-my-zsh.sh
+
+emulate sh -c '. ~/.profile'

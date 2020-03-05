@@ -1,13 +1,3 @@
-# oh-my-zsh stuff.
-# All I want is vi-mode, but I may use more later.
-export ZSH="/Users/clark/.oh-my-zsh"
-#ZSH_THEME="minimal"
-plugins=(
-    #git
-    vi-mode
-)
-source $ZSH/oh-my-zsh.sh
-
 # Directory relative to home.
 PROMPT='%~ $ '
 

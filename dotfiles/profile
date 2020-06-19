@@ -3,6 +3,10 @@
 
 export EDITOR="vim"
 
+# https://apple.stackexchange.com/questions/33677/how-can-i-configure-mac-terminal-to-have-color-ls-output
+# Colors in Mac
+export CLICOLOR=1
+
 # Don't run checks that require network access when checking R packages.
 export _R_CHECK_CRAN_INCOMING_REMOTE_=FALSE
 

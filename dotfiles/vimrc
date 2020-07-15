@@ -20,16 +20,13 @@ set shiftwidth=4
 set ignorecase
 set smartcase
 
-" To use Python mode
-"filetype off
-
 " Tim Pope's Package installer
 " Used for Slime / tmux
 execute pathogen#infect()
 "call pathogen#helptags()
 
 filetype on
-filetype plugin indent off
+filetype plugin indent on
 syntax on
 
 " From Practical Vim book

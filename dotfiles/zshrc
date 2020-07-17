@@ -3,3 +3,7 @@ PROMPT='%~ $ '
 
 emulate sh -c '. ~/.profile'
 emulate sh -c '. ~/.bashrc'
+
+# https://unix.stackexchange.com/questions/30168/how-to-enable-reverse-search-in-zsh
+bindkey -v
+bindkey '^R' history-incremental-search-backward

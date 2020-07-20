@@ -10,4 +10,10 @@ export CLICOLOR=1
 # Don't run checks that require network access when checking R packages.
 export _R_CHECK_CRAN_INCOMING_REMOTE_=FALSE
 
+# Correct paths for my work laptop
 export PATH="/Applications/Julia-1.4.app/Contents/Resources/julia/bin:$PATH"
+
+# Non-OS Version of ruby necessary for Jekyll
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+# Jekyll and friends
+export PATH="/usr/local/lib/ruby/gems/2.7.0/bin:$PATH"

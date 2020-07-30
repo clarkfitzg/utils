@@ -4,3 +4,19 @@
 alias tml='tmux list-sessions'
 alias tma='tmux attach -t'
 alias R="R --no-save"
+
+# For typing quick notes
+# Usage:
+#
+# $ nt              # file is current date + .md
+# $ nt "some note"  # file is current date + -some-note.md
+nt() {
+    d=`date +%F`
+    topic="$1"
+    if [[ ! -z $topic ]]
+    then
+        topic=`echo $topic | tr " " "-"`
+        topic=-${topic}
+    fi
+    vim "${d}${topic}.md"
+}

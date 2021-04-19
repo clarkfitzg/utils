@@ -18,7 +18,7 @@ export PATH="/usr/local/opt/ruby/bin:$PATH"
 
 # Jekyll and friends
 #export PATH="/usr/local/lib/ruby/gems/2.7.0/bin:$PATH"
-export PATH="/Users/fitzgerald/.gem/ruby/2.6.0/bin"
+#export PATH="/Users/fitzgerald/.gem/ruby/2.6.0/bin:$PATH"
 
 # https://apple.stackexchange.com/questions/371997/suppressing-the-default-interactive-shell-is-now-zsh-message-in-macos-catalina
 export BASH_SILENCE_DEPRECATION_WARNING=1
